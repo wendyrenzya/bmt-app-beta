@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BMT - Beranda (Tester)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <button id="menuBtn" class="icon-btn">☰</button>
+    <h1>BMT - Full UI Tester</h1>
+    <button id="apiBtn" class="icon-btn">API</button>
+  </header>
+
+  <main class="container">
+    <section class="card welcome-card">
+      <div class="welcome-left">
+        <h2>Beranda</h2>
+        <div class="sub">Jam device: <span id="deviceTime">--:--:--</span></div>
+      </div>
+      <div class="welcome-right">
+        <div class="grid-actions">
+          <button data-page="penjualan" class="big-btn">Penjualan</button>
+          <button data-page="servis" class="big-btn">Servis</button>
+          <button data-page="stock-masuk" class="big-btn">Stock Masuk</button>
+          <button data-page="pengeluaran" class="big-btn">Pengeluaran</button>
+          <button data-page="laporan" class="big-btn">Laporan</button>
+          <button data-page="more" class="big-btn">More</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card diag">
+      <div class="diag-header">
+        <h3>Diagnostic Inspector</h3>
+        <a id="apiBase" href="#" target="_blank">https://api.bigmotor.biz.id</a>
+      </div>
+      <pre id="inspector" class="inspector">— siap —</pre>
+    </section>
+
+    <section class="card list-preview">
+      <h3>Preview Barang (last fetched)</h3>
+      <div id="barangList" class="barang-list">Menunggu fetch...</div>
+      <div class="row">
+        <button id="fetchBarang" class="action-btn">Refresh /barang</button>
+        <button id="openInspector" class="action-btn">Show last response</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>Version: tester-ui-v1 · environment locked to <code>api.bigmotor.biz.id</code></small>
+  </footer>
+
+  <script src="beranda.js"></script>
+</body>
+</html>
