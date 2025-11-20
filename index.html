@@ -1,58 +1,219 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>BMT - Beranda (Tester)</title>
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Beranda - Big Motor Tingkulu</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f5f7fc;
+    }
+
+    /* Header */
+    .header {
+        padding: 15px 20px;
+        background: white;
+        font-size: 22px;
+        font-weight: bold;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .version-tag {
+        float: right;
+        background: #0d6efd;
+        padding: 6px 14px;
+        color: white;
+        border-radius: 20px;
+        font-size: 13px;
+        margin-top: -5px;
+    }
+
+    /* Sticky message (Toko buka) */
+    .sticky-box {
+        margin: 20px;
+        padding: 15px;
+        background: white;
+        border-radius: 14px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .sticky-sub {
+        color: #777;
+        font-size: 14px;
+        margin-top: 4px;
+    }
+
+    /* Card grid */
+    .grid {
+        margin: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+    }
+
+    .menu-card {
+        background: white;
+        padding: 22px 10px;
+        border-radius: 16px;
+        text-align: center;
+        font-size: 18px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .menu-card img {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 12px;
+    }
+
+    .menu-card-title {
+        font-weight: bold;
+        text-decoration: underline;
+    }
+
+    /* Custom message card */
+    .custom-box {
+        margin: 15px 20px 120px 20px;
+        padding: 15px;
+        background: #ffffff;
+        border-radius: 14px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    /* Bottom Navbar */
+    .navbar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: white;
+        padding: 10px 0;
+        display: flex;
+        justify-content: space-around;
+        box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+    }
+
+    .nav-item {
+        text-align: center;
+        font-size: 16px; /* lebih besar */
+    }
+
+    .nav-item img {
+        width: 32px;   /* icon diperbesar */
+        height: 32px;
+        display: block;
+        margin: 0 auto 6px;
+    }
+
+    .nav-active {
+        color: #0d6efd;
+        font-weight: bold;
+    }
+</style>
+
 </head>
 <body>
-  <header class="topbar">
-    <button id="menuBtn" class="icon-btn">☰</button>
-    <h1>BMT - Full UI Tester</h1>
-    <button id="apiBtn" class="icon-btn">API</button>
-  </header>
 
-  <main class="container">
-    <section class="card welcome-card">
-      <div class="welcome-left">
-        <h2>Beranda</h2>
-        <div class="sub">Jam device: <span id="deviceTime">--:--:--</span></div>
-      </div>
-      <div class="welcome-right">
-        <div class="grid-actions">
-          <button data-page="penjualan" class="big-btn">Penjualan</button>
-          <button data-page="servis" class="big-btn">Servis</button>
-          <button data-page="stock-masuk" class="big-btn">Stock Masuk</button>
-          <button data-page="pengeluaran" class="big-btn">Pengeluaran</button>
-          <button data-page="laporan" class="big-btn">Laporan</button>
-          <button data-page="more" class="big-btn">More</button>
-        </div>
-      </div>
-    </section>
+<div class="header">
+    Big Motor Tingkulu
+    <span class="version-tag">v1.3.1 (cons)</span>
+</div>
 
-    <section class="card diag">
-      <div class="diag-header">
-        <h3>Diagnostic Inspector</h3>
-        <a id="apiBase" href="#" target="_blank">https://api.bigmotor.biz.id</a>
-      </div>
-      <pre id="inspector" class="inspector">— siap —</pre>
-    </section>
+<!-- Sticky message -->
+<div class="sticky-box" id="stickyMessage">Toko buka</div>
+<div class="sticky-sub" id="stickySub" style="margin-left:20px; margin-top:-12px;">
+    Memuat informasi...
+</div>
 
-    <section class="card list-preview">
-      <h3>Preview Barang (last fetched)</h3>
-      <div id="barangList" class="barang-list">Menunggu fetch...</div>
-      <div class="row">
-        <button id="fetchBarang" class="action-btn">Refresh /barang</button>
-        <button id="openInspector" class="action-btn">Show last response</button>
-      </div>
-    </section>
-  </main>
+<!-- Grid menu -->
+<div class="grid">
+    <div class="menu-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" />
+        <div class="menu-card-title">Penjualan</div>
+    </div>
 
-  <footer class="footer">
-    <small>Version: tester-ui-v1 · environment locked to <code>api.bigmotor.biz.id</code></small>
-  </footer>
+    <div class="menu-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/679/679922.png" />
+        <div class="menu-card-title">Servis</div>
+    </div>
 
-  <script src="beranda.js"></script>
+    <div class="menu-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png" />
+        <div class="menu-card-title">Stok Masuk</div>
+    </div>
+
+    <div class="menu-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" />
+        <div class="menu-card-title">Pengeluaran</div>
+    </div>
+
+    <div class="menu-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828673.png" />
+        <div class="menu-card-title">Laporan</div>
+    </div>
+
+    <div class="menu-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828490.png" />
+        <div class="menu-card-title">More</div>
+    </div>
+</div>
+
+<!-- Custom message -->
+<div class="custom-box" id="customMessage">
+    Mengambil pesan...
+</div>
+
+
+<!-- Bottom Navbar -->
+<div class="navbar">
+    <div class="nav-item nav-active">
+        <img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png">
+        Beranda
+    </div>
+    <div class="nav-item">
+        <img src="https://cdn-icons-png.flaticon.com/512/4783/4783915.png">
+        Barang
+    </div>
+    <div class="nav-item">
+        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827951.png">
+        Riwayat
+    </div>
+    <div class="nav-item">
+        <img src="https://cdn-icons-png.flaticon.com/512/2099/2099058.png">
+        Pengaturan
+    </div>
+</div>
+
+
+<script>
+async function loadMessages() {
+    try {
+        const res = await fetch("https://api.bigmotor.biz.id/more");
+        const data = await res.json();
+
+        if (data.ok) {
+            document.getElementById("stickyMessage").innerText = data.sticky_message || "Status toko";
+            document.getElementById("stickySub").innerText = new Date().toLocaleString("id-ID");
+
+            document.getElementById("customMessage").innerText =
+                data.custom_message || "(Tidak ada pesan tambahan)";
+        } else {
+            document.getElementById("customMessage").innerText = "Gagal memuat pesan.";
+        }
+    } catch (err) {
+        document.getElementById("customMessage").innerText = "Error koneksi API.";
+    }
+}
+
+loadMessages();
+</script>
+
 </body>
 </html>
