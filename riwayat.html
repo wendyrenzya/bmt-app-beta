@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Riwayat</title>
+<style>
+body{margin:0;padding-bottom:90px;background:#f4f5f7;font-family:Inter;color:#222}
+.header{background:#ff8a00;color:#fff;padding:18px;text-align:center;font-size:18px;font-weight:700}
+.content{padding:20px;text-align:center;color:#555}
+.navbar{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:8px 0 6px;border-top:1px solid #e6e6e6;box-shadow:0 -3px 10px rgba(0,0,0,0.06);z-index:999}
+.nav-item{display:flex;flex-direction:column;align-items:center;font-size:11px;font-weight:500;color:#444;cursor:pointer}
+.nav-item img{width:28px;height:28px;margin-bottom:4px;opacity:.75}
+.nav-active{color:#ff8a00}
+.nav-active img{opacity:1}
+</style>
+</head>
+<body>
+
+<div class="header">Riwayat</div>
+<div class="content"><b>Fitur ini sedang dibangun</b></div>
+
+<div class="navbar">
+  <div class="nav-item" onclick="go('home.html')"><img src="assets/beranda.png">Beranda</div>
+  <div class="nav-item" onclick="go('barang.html')"><img src="assets/barang.png">Barang</div>
+  <div class="nav-item nav-active" onclick="go('riwayat.html')"><img src="assets/riwayat.png">Riwayat</div>
+  <div class="nav-item" onclick="go('pengaturan.html')"><img src="assets/pengaturan.png">Pengaturan</div>
+</div>
+
+<script src="navigationGuard.js"></script>
+<script>function go(u){ location.href = u; }</script>
+</body>
+</html>
