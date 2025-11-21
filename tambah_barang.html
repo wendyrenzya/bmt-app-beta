@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tambah Barang</title>
+
+<style>
+body{
+  margin:0;
+  background:#fff;
+  font-family:Inter,Roboto;
+  color:#222;
+}
+*{ -webkit-tap-highlight-color:transparent; }
+
+/* HEADER */
+.header{
+  background:linear-gradient(135deg,#3E8BFF,#A259FF);
+  color:#fff;
+  padding:16px 18px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  font-size:18px;
+  font-weight:700;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+.header img{
+  width:22px;
+  height:22px;
+  cursor:pointer;
+}
+
+/* CONTAINER */
+.container{
+  padding:18px;
+}
+
+/* FORM CARD */
+.form-card{
+  background:#fff;
+  border-radius:14px;
+  border:1px solid #eee;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.label{
+  font-size:14px;
+  font-weight:600;
+  color:#444;
+  margin-bottom:4px;
+}
+
+.input, select, textarea{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid #ccc;
+  font-size:14px;
+  box-sizing:border-box;
+}
+textarea{
+  resize:none;
+  height:90px;
+}
+
+/* More Section */
+.more-toggle{
+  width:100%;
+  text-align:center;
+  padding:10px 0;
+  cursor:pointer;
+  color:#3E8BFF;
+  font-weight:700;
+  font-size:14px;
+  display:flex;
+  gap:6px;
+  align-items:center;
+  justify-content:center;
+  margin-top:4px;
+}
+
+.more-wrap{
+  overflow:hidden;
+  transition:max-height .35s ease;
+  max-height:0;
+}
+
+/* PREVIEW IMAGE */
+.preview-img{
+  width:130px;
+  height:130px;
+  border-radius:14px;
+  background:#e5e5e5;
+  object-fit:cover;
+  margin-top:5px;
+}
+
+/* FOOTER BUTTONS */
+.footer-btns{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#fff;
+  border-top:1px solid #eee;
+  display:flex;
+  gap:12px;
+  padding:14px;
+}
+
+.btn{
+  flex:1;
+  padding:14px 0;
+  border-radius:12px;
+  text-align:center;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+}
+.btn-outline{
+  border:2px solid #888;
+  color:#555;
+}
+.btn-primary{
+  background:#3E8BFF;
+  color:#fff;
+}
+
+/* Bounce */
+.bounce{
+  animation:bounce .25s ease-out;
+}
+@keyframes bounce{
+  0%{transform:scale(1)}
+  40%{transform:scale(.92)}
+  100%{transform:scale(1)}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <img src="assets/back_white.png" id="btnBack">
+  Tambah Barang
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+  <div class="form-card">
+
+    <!-- Nama -->
+    <div>
+      <div class="label">Nama Barang *</div>
+      <input class="input" id="nama" required>
+    </div>
+
+    <!-- Kode -->
+    <div>
+      <div class="label">Kode Barang *</div>
+      <input class="input" id="kode" required>
+    </div>
+
+    <!-- Kategori -->
+    <div>
+      <div class="label">Kategori *</div>
+      <select id="kategori">
+        <option value="">— Pilih Kategori —</option>
+        <option>Oli</option>
+        <option>Ban</option>
+        <option>Sparepart</option>
+        <option>Lampu</option>
+        <option>Aki</option>
+        <option>Suspensi</option>
+        <option>Lainnya</option>
+      </select>
+    </div>
+
+    <!-- More Toggle -->
+    <div class="more-toggle" id="toggleMore">
+      ▼ More
+    </div>
+
+    <!-- MORE SECTION -->
+    <div id="moreSection" class="more-wrap">
+
+      <!-- Harga Modal -->
+      <div style="margin-top:14px;">
+        <div class="label">Harga Modal (opsional)</div>
+        <input class="input" id="harga_modal" type="number">
+      </div>
+
+      <!-- Deskripsi -->
+      <div>
+        <div class="label">Deskripsi (opsional)</div>
+        <textarea id="deskripsi"></textarea>
+      </div>
+
+      <!-- Foto URL -->
+      <div>
+        <div class="label">Foto (URL opsional)</div>
+        <input class="input" id="foto_url" placeholder="https://...">
+        <img src="assets/no_image.png" id="preview" class="preview-img">
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER BUTTONS -->
+<div class="footer-btns">
+  <div class="btn btn-outline" id="btnCancel">Batal</div>
+  <div class="btn btn-primary" id="btnSave">Simpan</div>
+</div>
+
+<script src="app.js"></script>
+<script src="navigationGuard.js"></script>
+
+<script>
+let changed = false;
+let moreOpen = false;
+
+/* Mark changes */
+function markChanged(){
+  if(!changed){
+    changed = true;
+    window.unsavedChanges = true;
+  }
+}
+
+document.querySelectorAll("input,select,textarea").forEach(el=>{
+  el.addEventListener("input", markChanged);
+});
+
+/* Back */
+btnBack.onclick = ()=>{
+  if(changed && !confirm("Perubahan belum disimpan. Kembali?")) return;
+  guardedNavigate("barang.html");
+};
+
+/* Cancel */
+btnCancel.onclick = ()=>{
+  btnCancel.classList.add("bounce");
+  setTimeout(()=>btnCancel.classList.remove("bounce"),260);
+  if(changed && !confirm("Perubahan belum disimpan. Batalkan?")) return;
+  guardedNavigate("barang.html");
+};
+
+/* Toggle More */
+toggleMore.onclick = ()=>{
+  toggleMore.classList.add("bounce");
+  setTimeout(()=>toggleMore.classList.remove("bounce"),250);
+
+  const more = document.getElementById("moreSection");
+
+  if(!moreOpen){
+    more.style.maxHeight = "600px";
+    toggleMore.textContent = "▲ Less";
+    moreOpen = true;
+  } else {
+    more.style.maxHeight = "0px";
+    toggleMore.textContent = "▼ More";
+    moreOpen = false;
+  }
+};
+
+/* Foto Preview (URL mode) */
+foto_url.oninput = ()=>{
+  const url = foto_url.value.trim();
+  preview.src = url ? url : "assets/no_image.png";
+};
+
+/* AUTO FETCH DUCKDUCKGO */
+async function fetchDuckImage(keyword){
+  try{
+    const q = encodeURIComponent(keyword);
+    const url = `https://duckduckgo.com/?q=${q}&iax=images&ia=images`;
+    const html = await fetch(url).then(r=>r.text());
+
+    const match = html.match(/imgurl":"(.*?)"/);
+    if(match && match[1]) return match[1];
+  }catch(e){
+    console.warn("DuckDuckGo fetch error:",e);
+  }
+  return ""; // fallback
+}
+
+/* Save */
+btnSave.onclick = async ()=>{
+  btnSave.classList.add("bounce");
+  setTimeout(()=>btnSave.classList.remove("bounce"),260);
+
+  const namaVal = nama.value.trim();
+  const kodeVal = kode.value.trim();
+  const kategoriVal = kategori.value.trim();
+  const modalVal = Number(harga_modal.value) || 0;
+  const jualVal = Number(prompt("Masukkan Harga Jual:", "")); // sementara popup (bisa buat input tersendiri)
+  const stokVal = 0;
+  const deskVal = deskripsi.value.trim();
+  let fotoVal = foto_url.value.trim();
+
+  if(!namaVal || !kodeVal || !kategoriVal){
+    alert("Nama, Kode, dan Kategori wajib diisi.");
+    return;
+  }
+
+  /* If foto empty → auto fetch */
+  if(!fotoVal){
+    fotoVal = await fetchDuckImage(namaVal);
+    if(!fotoVal){
+      fotoVal = "assets/no_image.png";
+    }
+  }
+
+  /* Create new barang */
+  getBarang().then(list=>{
+    const newID = (list.length?Math.max(...list.map(x=>x.id)):0)+1;
+
+    const newItem = {
+      id:newID,
+      nama:namaVal,
+      kode_barang:kodeVal,
+      kategori:kategoriVal,
+      harga_modal:modalVal,
+      harga:jualVal || 0,
+      stock:stokVal,
+      deskripsi:deskVal,
+      foto:fotoVal,
+      created_at:new Date().toISOString()
+    };
+
+    addBarang(newItem);
+    window.unsavedChanges = false;
+
+    alert("Barang berhasil ditambahkan");
+    guardedNavigate("barang.html");
+  });
+};
+</script>
+
+</body>
+</html>
