@@ -1,0 +1,166 @@
+========================================================
+BIG MOTOR UI & UX MASTER STANDARD (Versi 1.0)
+========================================================
+
+Dokumen ini menjadi pedoman resmi untuk seluruh halaman
+UI/UX Big Motor Apps. Berlaku untuk semua halaman:
+home, barang, barang_detail, tambah_barang, servis,
+pengaturan, stok_masuk, laporan, dan halaman lainnya.
+
+========================================================
+I. NAVBAR GLOBAL (DEFAULT UNTUK SEMUA HALAMAN)
+========================================================
+• Tinggi total: 76–80px
+• Posisi: fixed bottom, z-index 999
+• Latar: #FFFFFF
+• Border top: 1px solid #e6e6e6
+• Shadow: 0 -3px 10px rgba(0,0,0,0.06)
+• Layout: flex, space-around, center
+
+ICON:
+• Ukuran: 28×28 px
+• Margin bottom: 4px
+• Opacity inactive: 0.65
+• Opacity active: 1.0
+
+LABEL:
+• Font-size: 11px
+• Font-weight: 600
+• Warna inactive: #6A6A6A
+• Warna active: #3E8BFF
+
+ACTIVE ITEM:
+• Background: rgba(62,139,255,0.12)
+• Border-radius: 16px
+• Icon opacity: 1.0
+• Label biru
+
+ANIMASI:
+• Bounce-tap 0.25s (native-feel)
+
+========================================================
+II. SEARCH BAR
+========================================================
+• Border-radius: 14px
+• Background: #FFF
+• Tinggi: 40–44px
+• Shadow: 0 4px 18px rgba(0,0,0,0.03)
+• Padding: 10px 14px
+• Placeholder: ‘cari barang..’
+• Ikon filter: Material Tune icon
+
+========================================================
+III. FILTER SHEET (BOTTOM SHEET 60% HEIGHT)
+========================================================
+• Tinggi: 60vh
+• Rounded top: 20px
+• Background: #FFF
+• Shadow: 0 -10px 30px rgba(0,0,0,0.22)
+• Handle bar: width 44px, height 6px, radius full
+• Tutup saat klik overlay
+• Pilihan kategori + sorting
+
+ITEM FILTER:
+• Background default: #fafafa
+• Background active:
+  linear-gradient(
+    90deg, rgba(62,139,255,0.10),
+    rgba(162,89,255,0.06)
+  )
+• Padding item: 12px
+• Border-radius: 12px
+• Font-weight: 700
+
+========================================================
+IV. LIST BARANG
+========================================================
+KARTU:
+• Background: #FFF
+• Border-radius: 14px
+• Margin: 10px 12px
+• Padding: 12px
+• Shadow: 0 6px 18px rgba(24,24,24,0.06)
+• Klik item → bounce → go to detail
+
+FOTO:
+• Ukuran: 86×86 px
+• Border-radius: 12px
+• object-fit: cover
+
+TEKS:
+• Nama: bold 15px
+• Meta: warna #8b8b8b, size 13px
+
+========================================================
+V. SEARCH BEHAVIOR
+========================================================
+FUZZY SEARCH V2:
+• Tidak harus urut
+• Ignore spasi lebih
+• Normalize:
+  - lowercase
+  - hapus tanda baca
+  - compress whitespace
+• Matching longgar:
+  - includes() per token
+  - prefix matching
+  - typo-tolerance ≤ 1 huruf per token (levenshtein)
+• Field pencarian:
+  1. Nama
+  2. Kategori
+  3. Kode barang
+
+========================================================
+VI. HIGHLIGHT SEARCH
+========================================================
+• Semua token query yang cocok akan di-highlight:
+  <span style="color:#3E8BFF;font-weight:800">match</span>
+• Highlight berlaku meskipun fuzzy/prefix match
+
+========================================================
+VII. FAB (Floating Action Button)
+========================================================
+• Ukuran: 64×64 px
+• Warna:
+  linear-gradient(135deg, #A259FF, #3E8BFF)
+• Shadow:
+  0 12px 30px rgba(25,25,25,0.18)
+• Border-radius penuh
+• Bounce saat tap
+• Lokasi: kanan bawah, di atas navbar
+
+========================================================
+VIII. POPUP & DIALOG MODERN (WAJIB)
+========================================================
+TIDAK BOLEH MENGGUNAKAN:
+• confirm()
+• alert()
+• prompt()
+• popup browser default
+
+WAJIB MENGGUNAKAN:
+• Bottom sheet dialog khusus Big Motor:
+  - Rounded: 22px
+  - Shadow besar
+  - Icon warning/info 40–50px
+  - Judul font-weight 800
+  - Pesan font-size 15px
+  - Tombol:
+    > Batal (outline ungu)
+    > Ya (merah / biru)
+• Animasi: slide-up (0.28s)
+• Overlay: rgba(0,0,0,0.45)
+
+========================================================
+IX. KONFIRMASI NAVIGASI & UNSAVED
+========================================================
+• Jika UNSAVED = true dan user pindah halaman:
+  Tampilkan dialog:
+  “Perubahan belum disimpan. Tetap keluar?”
+
+• Tombol OK = biru (#3E8BFF)
+• Tombol Batal = outline ungu (#A259FF)
+
+========================================================
+END OF DOCUMENT
+========================================================
