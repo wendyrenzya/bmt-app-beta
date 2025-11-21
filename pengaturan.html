@@ -1,30 +1,26 @@
 <!DOCTYPE html>
-<html lang="id">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pengaturan</title>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pengaturan</title>
 <style>
 body{margin:0;padding-bottom:90px;background:#f4f5f7;font-family:Inter;color:#222}
-.header{background:#ff8a00;color:#fff;padding:18px;text-align:center;font-size:18px;font-weight:700}
-.content{padding:20px;text-align:center;color:#555}
-.navbar{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:8px 0 6px;border-top:1px solid #e6e6e6;box-shadow:0 -3px 10px rgba(0,0,0,0.06);z-index:999}
+.header{background:linear-gradient(135deg,#3E8BFF,#A259FF);color:#fff;padding:20px;text-align:center;font-size:18px;font-weight:700}
+.content{padding:30px 20px;text-align:center;color:#555}
+.navbar{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:8px 0 6px;border-top:1px solid #e6e6e6;z-index:999}
 .nav-item{display:flex;flex-direction:column;align-items:center;font-size:11px;font-weight:500;color:#444;cursor:pointer}
 .nav-item img{width:28px;height:28px;margin-bottom:4px;opacity:.75}
-.nav-active{color:#ff8a00}
-.nav-active img{opacity:1}
-</style>
-</head>
-<body>
+.bounce { animation: bounceTap 0.25s ease-out; }
+@keyframes bounceTap { 0%{transform:scale(1)} 40%{transform:scale(0.92)} 100%{transform:scale(1)} }
+</style></head><body>
 
 <div class="header">Pengaturan</div>
 <div class="content"><b>Fitur ini sedang dibangun</b></div>
 
 <div class="navbar">
-  <div class="nav-item" onclick="go('home.html')"><img src="assets/beranda.png">Beranda</div>
-  <div class="nav-item" onclick="go('barang.html')"><img src="assets/barang.png">Barang</div>
-  <div class="nav-item" onclick="go('riwayat.html')"><img src="assets/riwayat.png">Riwayat</div>
-  <div class="nav-item nav-active" onclick="go('pengaturan.html')"><img src="assets/pengaturan.png">Pengaturan</div>
+  <div class="nav-item" onclick="bounceThenNavigate(this,'home.html')"><img src="assets/beranda.png">Beranda</div>
+  <div class="nav-item" onclick="bounceThenNavigate(this,'barang.html')"><img src="assets/barang.png">Barang</div>
+  <div class="nav-item" onclick="bounceThenNavigate(this,'riwayat.html')"><img src="assets/riwayat.png">Riwayat</div>
+  <div class="nav-item" onclick="bounceThenNavigate(this,'pengaturan.html')"><img src="assets/pengaturan.png">Pengaturan</div>
 </div>
 
 <script src="navigationGuard.js"></script>
-<script>function go(u){ location.href = u; }</script>
-</body>
-</html>
+<script>function bounceThenNavigate(el,url){ if(el) el.classList.add('bounce'); setTimeout(()=> el && el.classList.remove('bounce'),260); setTimeout(()=> guardedNavigate(url),90); }</script>
+</body></html>
