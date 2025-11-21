@@ -1,112 +1,74 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Big Motor Apps</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Beranda</title>
+
 <style>
-  :root{
-    --bg:#f4f5f7;
-    --accent:#ff8a00;
-    --card:#fff;
-    --muted:#666;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);font-family:Inter,Segoe UI,Roboto,'Helvetica Neue',Arial;color:#222}
+body{margin:0;background:#f4f5f7;font-family:Inter,Arial;}
+.header{background:#ff8a00;color:#fff;padding:22px 16px 32px;font-size:20px;font-weight:700;}
 
-  .header{
-    background:var(--accent);
-    padding:22px 18px 34px;
-    color:#fff;font-weight:700;font-size:20px;
-  }
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:16px;}
+.menu-item{background:#fff;border-radius:16px;padding:16px 10px 14px;text-align:center;
+box-shadow:0 2px 10px rgba(0,0,0,0.08);}
+.menu-item img{width:72px;height:72px;object-fit:contain;}
+.menu-item span{display:block;margin-top:10px;font-size:14px;font-weight:600;}
 
-  .sticky-card{
-    background:var(--card); margin:-18px 16px 14px; padding:14px; border-radius:14px;
-    box-shadow:0 3px 12px rgba(0,0,0,0.12); font-weight:600;
-  }
-
-  /* GRID */
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:16px;}
-  .menu-item{
-    background:var(--card);border-radius:18px;padding:18px 8px 14px;text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
-    cursor:pointer;
-  }
-  .menu-item img{width:72px;height:72px;object-fit:contain;display:block;margin:0 auto}
-  .menu-item span{display:block;margin-top:10px;font-size:14px;font-weight:600;color:#111}
-
-  .custom-card{
-    background:var(--card);margin:12px 16px 95px;padding:16px;border-radius:16px;
-    box-shadow:0 3px 10px rgba(0,0,0,0.10)
-  }
-
-  /* NAVBAR */
-  .navbar{
-    position:fixed;bottom:0;left:0;right:0;background:var(--card);
-    display:flex;justify-content:space-around;padding:8px 0;border-top:1px solid #e6e6e6;
-    box-shadow:0 -3px 10px rgba(0,0,0,0.06);
-  }
-  .nav-item{
-    display:flex;flex-direction:column;align-items:center;font-size:11px;
-    font-weight:500;color:#444;cursor:pointer;
-  }
-  .nav-item img{width:28px;height:28px;object-fit:contain;margin-bottom:4px}
+.navbar{
+position:fixed;bottom:0;left:0;right:0;
+background:#fff;border-top:1px solid #ddd;
+display:flex;justify-content:space-around;padding:8px 0;
+box-shadow:0 -3px 10px rgba(0,0,0,0.06);
+}
+.nav-item{text-align:center;font-size:11px;color:#444;}
+.nav-item img{width:28px;height:28px;display:block;margin:0 auto 4px;}
 </style>
 </head>
+
 <body>
 
 <div class="header">Big Motor Apps</div>
-<div class="sticky-card" id="stickyMessage">Loading...</div>
 
 <div class="grid">
+  <a href="penjualan.html" class="menu-item">
+    <img src="assets/penjualan.png"><span>Penjualan</span>
+  </a>
 
-  <div class="menu-item" onclick="location.href='penjualan.html'">
-    <img src="assets/penjualan.png">
-    <span>Penjualan</span>
-  </div>
+  <a href="servis.html" class="menu-item">
+    <img src="assets/servis.png"><span>Servis</span>
+  </a>
 
-  <div class="menu-item" onclick="location.href='servis.html'">
-    <img src="assets/servis.png">
-    <span>Servis</span>
-  </div>
+  <a href="stok_masuk.html" class="menu-item">
+    <img src="assets/stok_masuk.png"><span>Stok Masuk</span>
+  </a>
 
-  <div class="menu-item" onclick="location.href='stok_masuk.html'">
-    <img src="assets/stok_masuk.png">
-    <span>Stok Masuk</span>
-  </div>
+  <a href="pengeluaran.html" class="menu-item">
+    <img src="assets/pengeluaran.png"><span>Pengeluaran</span>
+  </a>
 
-  <div class="menu-item" onclick="location.href='pengeluaran.html'">
-    <img src="assets/pengeluaran.png">
-    <span>Pengeluaran</span>
-  </div>
+  <a href="laporan.html" class="menu-item">
+    <img src="assets/laporan.png"><span>Laporan</span>
+  </a>
 
-  <div class="menu-item" onclick="location.href='laporan.html'">
-    <img src="assets/laporan.png">
-    <span>Laporan</span>
-  </div>
-
-  <div class="menu-item" onclick="location.href='more.html'">
-    <img src="assets/more.png">
-    <span>More</span>
-  </div>
-
+  <a href="more.html" class="menu-item">
+    <img src="assets/more.png"><span>More</span>
+  </a>
 </div>
 
-<div class="custom-card" id="customMessage">Memuat data...</div>
-
 <div class="navbar">
-  <div class="nav-item" onclick="location.href='index.html'">
-    <img src="assets/beranda.png"> Beranda
-  </div>
-  <div class="nav-item" onclick="location.href='barang.html'">
-    <img src="assets/barang.png"> Barang
-  </div>
-  <div class="nav-item" onclick="location.href='riwayat.html'">
-    <img src="assets/riwayat.png"> Riwayat
-  </div>
-  <div class="nav-item" onclick="location.href='pengaturan.html'">
-    <img src="assets/pengaturan.png"> Pengaturan
-  </div>
+  <a class="nav-item" href="beranda.html">
+    <img src="assets/beranda.png">Beranda
+  </a>
+  <a class="nav-item" href="barang.html">
+    <img src="assets/barang.png">Barang
+  </a>
+  <a class="nav-item" href="riwayat.html">
+    <img src="assets/riwayat.png">Riwayat
+  </a>
+  <a class="nav-item" href="pengaturan.html">
+    <img src="assets/pengaturan.png">Pengaturan
+  </a>
 </div>
 
 </body>
