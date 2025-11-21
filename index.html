@@ -1,153 +1,119 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Big Motor Apps</title>
-
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Big Motor Apps v1.0</title>
 <style>
+  :root{
+    --bg:#f4f5f7;
+    --accent:#ff8a00;
+    --card:#fff;
+    --muted:#666;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);font-family:Inter,Segoe UI,Roboto,'Helvetica Neue',Arial;color:#222}
+  .header{
+    background:var(--accent);
+    padding:22px 18px 34px;
+    color:#fff;font-weight:700;font-size:20px;
+  }
+  .sticky-card{
+    background:var(--card);
+    margin:-18px 16px 14px; padding:14px; border-radius:14px;
+    box-shadow:0 3px 12px rgba(0,0,0,0.12); font-weight:600;
+  }
 
-body {
-    margin: 0;
-    padding: 0;
-    background: #f4f6fa;
-    font-family: Arial, sans-serif;
-}
+  /* GRID */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:16px;}
+  .menu-item{
+    background:var(--card);border-radius:18px;padding:18px 8px 14px;text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+  }
+  .menu-item img{width:72px;height:72px;object-fit:contain;display:block;margin:0 auto}
+  .menu-item span{display:block;margin-top:10px;font-size:14px;font-weight:600;color:#111}
 
-/* HEADER */
-.header {
-    background: #ffffff;
-    padding: 18px;
-    font-size: 22px;
-    font-weight: bold;
-    color: #1d1d1d;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-}
+  .custom-card{background:var(--card);margin:12px 16px 95px;padding:16px;border-radius:16px;box-shadow:0 3px 10px rgba(0,0,0,0.10)}
 
-/* GRID WRAPPER */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    padding: 20px;
-}
-
-/* GRID CARD */
-.card {
-    background: #ffffff;
-    padding: 18px 12px;
-    border-radius: 18px;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-.card img {
-    width: 68px; 
-    height: 68px;
-}
-
-.card-title {
-    margin-top: 10px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #1d1d1d;
-}
-
-/* NAVBAR */
-.navbar {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: #ffffff;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0 12px;
-    border-radius: 18px 18px 0 0;
-    box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
-}
-
-.nav-item {
-    text-align: center;
-    flex: 1;
-}
-
-.nav-item img {
-    width: 26px;
-    height: 26px;
-    margin-bottom: 3px;
-}
-
-.nav-text {
-    font-size: 12px;
-    color: #1d1d1d;
-}
-
+  /* NAVBAR */
+  .navbar{
+    position:fixed;bottom:0;left:0;right:0;background:var(--card);
+    display:flex;justify-content:space-around;padding:8px 0;border-top:1px solid #e6e6e6;
+    box-shadow:0 -3px 10px rgba(0,0,0,0.06);
+  }
+  .nav-item{display:flex;flex-direction:column;align-items:center;font-size:11px;font-weight:500;color:#444;}
+  .nav-item img{width:28px;height:28px;object-fit:contain;margin-bottom:4px}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="header">Big Motor Apps</div>
+<!-- check login -->
+<script>
+if(!localStorage.getItem("user")) { window.location.href='index.html'; }
+</script>
 
-<!-- GRID MENU -->
+<div class="header">Big Motor Apps v1.0</div>
+<div class="sticky-card" id="stickyMessage">Loading...</div>
+
 <div class="grid">
+  <div class="menu-item">
+    <img src="assets/penjualan.png" alt="Penjualan">
+    <span>Penjualan</span>
+  </div>
 
-    <div class="card">
-        <img src="assets/icons/penjualan.png" />
-        <div class="card-title">Penjualan</div>
-    </div>
+  <div class="menu-item">
+    <img src="assets/servis.png" alt="Servis">
+    <span>Servis</span>
+  </div>
 
-    <div class="card">
-        <img src="assets/icons/servis.png" />
-        <div class="card-title">Servis</div>
-    </div>
+  <div class="menu-item">
+    <img src="assets/stok_masuk.png" alt="Stok Masuk">
+    <span>Stok Masuk</span>
+  </div>
 
-    <div class="card">
-        <img src="assets/icons/stok_masuk.png" />
-        <div class="card-title">Stok Masuk</div>
-    </div>
+  <div class="menu-item">
+    <img src="assets/pengeluaran.png" alt="Pengeluaran">
+    <span>Pengeluaran</span>
+  </div>
 
-    <div class="card">
-        <img src="assets/icons/pengeluaran.png" />
-        <div class="card-title">Pengeluaran</div>
-    </div>
+  <div class="menu-item">
+    <img src="assets/laporan.png" alt="Laporan">
+    <span>Laporan</span>
+  </div>
 
-    <div class="card">
-        <img src="assets/icons/laporan.png" />
-        <div class="card-title">Laporan</div>
-    </div>
-
-    <div class="card">
-        <img src="assets/icons/more.png" />
-        <div class="card-title">More</div>
-    </div>
-
+  <div class="menu-item">
+    <img src="assets/more.png" alt="More">
+    <span>More</span>
+  </div>
 </div>
 
-<!-- NAVBAR -->
+<div class="custom-card" id="customMessage">Memuat data...</div>
+
 <div class="navbar">
-
-    <div class="nav-item">
-        <img src="assets/icons/beranda.png" />
-        <div class="nav-text">Beranda</div>
-    </div>
-
-    <div class="nav-item">
-        <img src="assets/icons/barang.png" />
-        <div class="nav-text">Barang</div>
-    </div>
-
-    <div class="nav-item">
-        <img src="assets/icons/riwayat.png" />
-        <div class="nav-text">Riwayat</div>
-    </div>
-
-    <div class="nav-item">
-        <img src="assets/icons/pengaturan.png" />
-        <div class="nav-text">Pengaturan</div>
-    </div>
-
+  <div class="nav-item">
+    <img src="assets/beranda.png" alt="Beranda">
+    Beranda
+  </div>
+  <div class="nav-item">
+    <img src="assets/barang.png" alt="Barang">
+    Barang
+  </div>
+  <div class="nav-item">
+    <img src="assets/riwayat.png" alt="Riwayat">
+    Riwayat
+  </div>
+  <div class="nav-item">
+    <img src="assets/pengaturan.png" alt="Pengaturan">
+    Pengaturan
+  </div>
 </div>
+
+<script>
+fetch('/api/more').then(r=>r.json()).then(d=>{
+  document.getElementById('stickyMessage').innerText=d.sticky_message||'';
+  document.getElementById('customMessage').innerText=d.custom_message||'';
+});
+</script>
 
 </body>
 </html>
