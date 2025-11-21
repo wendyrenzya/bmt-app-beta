@@ -1,19 +1,76 @@
 <!DOCTYPE html>
-<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>More</title>
-<style>
-body{margin:0;padding-top:64px;background:#f4f5f7;font-family:Inter;color:#222}
-.header{background:linear-gradient(135deg,#3E8BFF,#A259FF);color:#fff;padding:14px 18px;text-align:center;font-size:18px;font-weight:700;position:fixed;top:0;left:0;right:0;z-index:20}
-.content{padding:110px 20px 40px;text-align:center;color:#555}
-.fab-home{position:fixed;top:calc(64px + 16px);left:16px;width:46px;height:46px;border-radius:50%;background:#ff8a00;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(0,0,0,0.2);z-index:999}
-.fab-home img{width:24px;height:24px}
-.bounce { animation: bounceTap 0.25s ease-out; }
-@keyframes bounceTap { 0%{transform:scale(1)} 40%{transform:scale(0.92)} 100%{transform:scale(1)} }
-</style></head><body>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>More</title>
 
-<div class="fab-home" title="Beranda"><img src="assets/home_white.png" alt="home"></div>
+<style>
+body{
+  margin:0;padding-top:64px;
+  background:#f4f5f7;font-family:Inter;color:#222;
+}
+*{ -webkit-tap-highlight-color:transparent; }
+
+.header{
+  background:linear-gradient(135deg,#3E8BFF,#A259FF);
+  color:#fff;padding:14px 18px;text-align:center;
+  font-size:18px;font-weight:700;
+  position:fixed;top:0;left:0;right:0;z-index:20;
+}
+
+.content{
+  padding:110px 20px 40px;text-align:center;color:#555;
+}
+
+.fab-home{
+  position:fixed;top:calc(64px + 16px);left:16px;
+  width:46px;height:46px;border-radius:50%;
+  background:#ff8a00;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 3px 12px rgba(0,0,0,0.22);
+  z-index:999;
+}
+.fab-home img{width:24px;height:24px}
+
+.fab-bounce{animation:fabBounce .28s ease-out;}
+@keyframes fabBounce{
+  0%{transform:scale(1)}
+  40%{transform:scale(.85)}
+  100%{transform:scale(1)}
+}
+
+.bounce{animation:bounceTap .25s ease-out;}
+@keyframes bounceTap{
+  0%{transform:scale(1)}
+  40%{transform:scale(.92)}
+  100%{transform:scale(1)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="fab-home"><img src="assets/home_white.png"></div>
+
 <div class="header">More</div>
-<div class="content"><b>Fitur ini sedang dibangun</b></div>
+
+<div class="content">
+  <b>Fitur ini sedang dibangun</b>
+</div>
 
 <script src="navigationGuard.js"></script>
-<script>document.addEventListener("DOMContentLoaded", ()=> { const f=document.querySelector(".fab-home"); if(f) f.addEventListener("click", ()=>{ f.classList.add('bounce'); setTimeout(()=> f.classList.remove('bounce'),260); }); });</script>
-</body></html>
+<script>
+document.addEventListener("DOMContentLoaded", ()=>{
+  const f=document.querySelector(".fab-home");
+  if(f){
+    f.addEventListener("click", ()=>{
+      f.classList.add("fab-bounce");
+      setTimeout(()=> f.classList.remove("fab-bounce"),280);
+    });
+  }
+});
+</script>
+
+</body>
+</html>
