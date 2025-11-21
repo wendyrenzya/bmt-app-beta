@@ -6,19 +6,38 @@
 <title>Big Motor Apps — Beranda</title>
 <style>
 :root{--card:#fff}
-body{margin:0;padding-bottom:90px;background:#f4f5f7;font-family:Inter,Segoe UI,Roboto;color:#222}
+body{
+  margin:0;
+  padding-bottom:90px;
+  background:#f4f5f7;
+  font-family:Inter,Segoe UI,Roboto;
+  color:#222;
+}
 
-/* gradient header */
+/* Hilangkan highlight biru */
+* { -webkit-tap-highlight-color: transparent; }
+
+/* Header gradient */
 .header{
   background: linear-gradient(135deg, #3E8BFF, #A259FF);
   color:#fff;
   padding:20px 18px 20px;
 }
 .header-title{font-size:20px;font-weight:700}
-.user-row{display:flex;justify-content:space-between;margin-top:6px;font-size:14px;font-weight:500}
-.datetime{font-size:13px;opacity:.95;text-align:right}
+.user-row{
+  display:flex;
+  justify-content:space-between;
+  margin-top:6px;
+  font-size:14px;
+  font-weight:500;
+}
+.datetime{
+  font-size:13px;
+  opacity:.95;
+  text-align:right;
+}
 
-/* sticky message area (white) */
+/* Sticky white card */
 .sticky-card{
   background:var(--card);
   margin:20px 16px 22px;
@@ -28,7 +47,7 @@ body{margin:0;padding-bottom:90px;background:#f4f5f7;font-family:Inter,Segoe UI,
   font-weight:600;
 }
 
-/* grid & menu */
+/* Grid menu */
 .grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -45,36 +64,88 @@ body{margin:0;padding-bottom:90px;background:#f4f5f7;font-family:Inter,Segoe UI,
   cursor:pointer;
   transition:transform .15s;
 }
-.menu-item img{width:72px;height:72px;object-fit:contain;margin:0 auto}
-.menu-item span{display:block;margin-top:10px;font-size:14px;font-weight:600;color:#111}
+.menu-item img{
+  width:72px;height:72px;object-fit:contain;
+}
+.menu-item span{
+  display:block;
+  margin-top:10px;
+  font-size:14px;
+  font-weight:600;
+  color:#111;
+}
 .menu-item:active{ transform:scale(.98); }
 
-/* custom message */
+/* Custom message card */
 .custom-info-card{
   background:var(--card);
   margin:20px 16px 20px;
   padding:16px;
   border-radius:16px;
   box-shadow:0 3px 10px rgba(0,0,0,0.10);
-  font-size:14px;color:#444;line-height:1.5;
+  font-size:14px;
+  color:#444;
+  line-height:1.5;
 }
 
-/* navbar */
+/* Navbar */
 .navbar{
-  position:fixed;bottom:0;left:0;right:0;background:var(--card);display:flex;justify-content:space-around;padding:8px 0 6px;border-top:1px solid #e6e6e6;box-shadow:0 -3px 10px rgba(0,0,0,0.06);z-index:999;
+  position:fixed;
+  bottom:0;left:0;right:0;
+  background:#fff;
+  display:flex;
+  justify-content:space-around;
+  padding:8px 0 6px;
+  border-top:1px solid #e6e6e6;
+  box-shadow:0 -3px 10px rgba(0,0,0,0.06);
+  z-index:999;
 }
-.nav-item{display:flex;flex-direction:column;align-items:center;font-size:11px;font-weight:500;color:#444;cursor:pointer}
-.nav-item img{width:28px;height:28px;margin-bottom:4px;opacity:.75}
-.nav-active{color:#fff} /* active uses contrast on gradient */
-.nav-active img{filter:brightness(2)}
 
-/* bounce class (in case navigationGuard didn't inject yet) */
-.bounce { animation: bounceTap 0.25s ease-out; }
-@keyframes bounceTap { 0%{transform:scale(1)} 40%{transform:scale(0.92)} 100%{transform:scale(1)} }
+.nav-item{
+  display:flex; flex-direction:column; align-items:center;
+  font-size:11px; font-weight:600;
+  padding:6px 12px;
+  border-radius:16px;
+  cursor:pointer;
+  color:#6a6a6a;
+  transition:.15s;
+}
+
+.nav-item img{
+  width:28px;height:28px;margin-bottom:4px;
+  opacity:.65; transition:.15s;
+}
+
+/* Active tab */
+.nav-active{
+  background:rgba(62,139,255,0.12);
+  color:#3E8BFF !important;
+}
+.nav-active img{
+  opacity:1 !important;
+}
+
+/* Bounce (menu + navbar) */
+.bounce { animation: bounceTap .25s ease-out; }
+@keyframes bounceTap{
+  0%{transform:scale(1)}
+  40%{transform:scale(.92)}
+  100%{transform:scale(1)}
+}
+
+/* FAB bounce kuat */
+.fab-bounce { animation: fabBounce .28s ease-out; }
+@keyframes fabBounce{
+  0%{transform:scale(1)}
+  40%{transform:scale(.85)}
+  100%{transform:scale(1)}
+}
 </style>
 </head>
+
 <body>
 
+<!-- Header -->
 <div class="header">
   <div class="header-title">Big Motor Apps</div>
   <div class="user-row">
@@ -83,31 +154,35 @@ body{margin:0;padding-bottom:90px;background:#f4f5f7;font-family:Inter,Segoe UI,
   </div>
 </div>
 
+<!-- Sticky Message -->
 <div class="sticky-card" id="stickyMessage">Memuat...</div>
 
+<!-- Grid Menu -->
 <div class="grid">
-  <div class="menu-item" data-target="penjualan.html" onclick="bounceThenNavigate(this,'penjualan.html')">
+  <div class="menu-item" onclick="bounceThenNavigate(this,'penjualan.html')">
     <img src="assets/penjualan.png"><span>Penjualan</span>
   </div>
-  <div class="menu-item" data-target="servis.html" onclick="bounceThenNavigate(this,'servis.html')">
+  <div class="menu-item" onclick="bounceThenNavigate(this,'servis.html')">
     <img src="assets/servis.png"><span>Servis</span>
   </div>
-  <div class="menu-item" data-target="stok_masuk.html" onclick="bounceThenNavigate(this,'stok_masuk.html')">
+  <div class="menu-item" onclick="bounceThenNavigate(this,'stok_masuk.html')">
     <img src="assets/stok_masuk.png"><span>Stok Masuk</span>
   </div>
-  <div class="menu-item" data-target="pengeluaran.html" onclick="bounceThenNavigate(this,'pengeluaran.html')">
+  <div class="menu-item" onclick="bounceThenNavigate(this,'pengeluaran.html')">
     <img src="assets/pengeluaran.png"><span>Pengeluaran</span>
   </div>
-  <div class="menu-item" data-target="laporan.html" onclick="bounceThenNavigate(this,'laporan.html')">
+  <div class="menu-item" onclick="bounceThenNavigate(this,'laporan.html')">
     <img src="assets/laporan.png"><span>Laporan</span>
   </div>
-  <div class="menu-item" data-target="more.html" onclick="bounceThenNavigate(this,'more.html')">
+  <div class="menu-item" onclick="bounceThenNavigate(this,'more.html')">
     <img src="assets/more.png"><span>More</span>
   </div>
 </div>
 
+<!-- Custom Message -->
 <div class="custom-info-card" id="customMessage">Memuat data...</div>
 
+<!-- Navbar -->
 <div class="navbar">
   <div class="nav-item nav-active" onclick="bounceThenNavigate(this,'home.html')">
     <img src="assets/beranda.png">Beranda
@@ -125,26 +200,34 @@ body{margin:0;padding-bottom:90px;background:#f4f5f7;font-family:Inter,Segoe UI,
 
 <script src="app.js"></script>
 <script src="navigationGuard.js"></script>
-<script>
-function bounceThenNavigate(el,url){ try{ if(el) el.classList.add('bounce'); setTimeout(()=> el && el.classList.remove('bounce'),260);}catch(e){} setTimeout(()=> guardedNavigate(url),90); }
-function go(u){ location.href = u; }
 
+<script>
+/* Local bounce + navigate */
+function bounceThenNavigate(el,url){
+  if(el){ el.classList.add("bounce"); setTimeout(()=> el.classList.remove("bounce"),280); }
+  setTimeout(()=> guardedNavigate(url),90);
+}
+
+/* Load username dummy */
 function loadUser(){
-  const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {name:"Guest"};
+  const user = localStorage.getItem("user") ?
+    JSON.parse(localStorage.getItem("user")) :
+    {name:"Guest"};
   document.getElementById("userName").textContent = `Hai, ${user.name}`;
 }
 loadUser();
 
+/* Clock */
 function updateClock(){
   const now=new Date();
-  const days=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
-  const hari=days[now.getDay()];
+  const hari=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"][now.getDay()];
   const tgl=now.toLocaleDateString("id-ID");
   const jam=now.toLocaleTimeString("id-ID",{hour:"2-digit",minute:"2-digit"});
   document.getElementById("dateTimeText").textContent = `${hari}, ${tgl} — ${jam}`;
 }
 setInterval(updateClock,1000); updateClock();
 
+/* Load custom messages */
 getSettings().then(s=>{
   document.getElementById('stickyMessage').innerText = s.sticky_message || '';
   document.getElementById('customMessage').innerText = s.custom_message || '';
