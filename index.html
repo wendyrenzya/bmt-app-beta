@@ -1,186 +1,153 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Big Motor Apps v1.0</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Big Motor Apps</title>
 
 <style>
-    body {
-        margin: 0;
-        background: #f4f5f7;
-        font-family: 'Inter', sans-serif;
-        color: #333;
-    }
 
-    /* HEADER */
-    .header {
-        background: #ff8a00;
-        padding: 22px 20px 30px;
-        color: white;
-        font-weight: 700;
-        font-size: 20px;
-    }
+body {
+    margin: 0;
+    padding: 0;
+    background: #f4f6fa;
+    font-family: Arial, sans-serif;
+}
 
-    /* Sticky message */
-    .sticky-card {
-        background: white;
-        margin: -18px 16px 14px;
-        padding: 14px;
-        border-radius: 14px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-        font-size: 14px;
-        font-weight: 500;
-    }
+/* HEADER */
+.header {
+    background: #ffffff;
+    padding: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #1d1d1d;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
 
-    /* Grid */
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-        padding: 16px;
-    }
+/* GRID WRAPPER */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    padding: 20px;
+}
 
-    .menu-item {
-        background: white;
-        border-radius: 18px;
-        padding: 18px 8px 14px;
-        text-align: center;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-    }
+/* GRID CARD */
+.card {
+    background: #ffffff;
+    padding: 18px 12px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
 
-    .menu-item img {
-        width: 74px;
-        height: 74px;
-        object-fit: contain;
-    }
+.card img {
+    width: 68px; 
+    height: 68px;
+}
 
-    .menu-item span {
-        display: block;
-        margin-top: 10px;
-        font-size: 14px;
-        font-weight: 600;
-    }
+.card-title {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #1d1d1d;
+}
 
-    /* Custom message */
-    .custom-card {
-        background: white;
-        margin: 10px 16px 95px;
-        padding: 16px;
-        border-radius: 16px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.10);
-        font-size: 14px;
-    }
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #ffffff;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0 12px;
+    border-radius: 18px 18px 0 0;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+}
 
-    /* NAVBAR */
-    .navbar {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        background: white;
-        display: flex;
-        justify-content: space-around;
-        padding: 6px 0 8px;
-        border-top: 1px solid #ddd;
-        box-shadow: 0 -3px 10px rgba(0,0,0,0.08);
-    }
+.nav-item {
+    text-align: center;
+    flex: 1;
+}
 
-    .nav-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-size: 11px;
-        font-weight: 500;
-        color: #444;
-    }
+.nav-item img {
+    width: 26px;
+    height: 26px;
+    margin-bottom: 3px;
+}
 
-    .nav-item img {
-        width: 26px;
-        height: 26px;
-        margin-bottom: 4px;
-        object-fit: contain;
-    }
+.nav-text {
+    font-size: 12px;
+    color: #1d1d1d;
+}
 
 </style>
 </head>
 <body>
 
-    <div class="header">
-        Big Motor Apps v1.0
+<!-- HEADER -->
+<div class="header">Big Motor Apps</div>
+
+<!-- GRID MENU -->
+<div class="grid">
+
+    <div class="card">
+        <img src="assets/icons/penjualan.png" />
+        <div class="card-title">Penjualan</div>
     </div>
 
-    <div class="sticky-card" id="stickyMessage">
-        Loading...
+    <div class="card">
+        <img src="assets/icons/servis.png" />
+        <div class="card-title">Servis</div>
     </div>
 
-    <div class="grid">
-
-        <div class="menu-item">
-            <img src="assets/pure_padded_penjualan.png">
-            <span>Penjualan</span>
-        </div>
-
-        <div class="menu-item">
-            <img src="assets/pure_padded_servis.png">
-            <span>Servis</span>
-        </div>
-
-        <div class="menu-item">
-            <img src="assets/pure_padded_stok_masuk.png">
-            <span>Stok Masuk</span>
-        </div>
-
-        <div class="menu-item">
-            <img src="assets/pure_padded_pengeluaran.png">
-            <span>Pengeluaran</span>
-        </div>
-
-        <div class="menu-item">
-            <img src="assets/pure_padded_laporan.png">
-            <span>Laporan</span>
-        </div>
-
-        <div class="menu-item">
-            <img src="assets/pure_padded_more.png">
-            <span>More</span>
-        </div>
-
+    <div class="card">
+        <img src="assets/icons/stok_masuk.png" />
+        <div class="card-title">Stok Masuk</div>
     </div>
 
-    <div class="custom-card" id="customMessage">
-        Memuat data...
+    <div class="card">
+        <img src="assets/icons/pengeluaran.png" />
+        <div class="card-title">Pengeluaran</div>
     </div>
 
-    <div class="navbar">
-        <div class="nav-item">
-            <img src="assets/pure_padded_home.png">
-            Beranda
-        </div>
-
-        <div class="nav-item">
-            <img src="assets/pure_padded_penjualan.png">
-            Barang
-        </div>
-
-        <div class="nav-item">
-            <img src="assets/pure_padded_laporan.png">
-            Riwayat
-        </div>
-
-        <div class="nav-item">
-            <img src="assets/pure_padded_more.png">
-            More
-        </div>
+    <div class="card">
+        <img src="assets/icons/laporan.png" />
+        <div class="card-title">Laporan</div>
     </div>
 
-<script>
-fetch('/api/more')
-    .then(r => r.json())
-    .then(d => {
-        document.getElementById("stickyMessage").innerText = d.sticky_message || "";
-        document.getElementById("customMessage").innerText = d.custom_message || "";
-    });
-</script>
+    <div class="card">
+        <img src="assets/icons/more.png" />
+        <div class="card-title">More</div>
+    </div>
+
+</div>
+
+<!-- NAVBAR -->
+<div class="navbar">
+
+    <div class="nav-item">
+        <img src="assets/icons/beranda.png" />
+        <div class="nav-text">Beranda</div>
+    </div>
+
+    <div class="nav-item">
+        <img src="assets/icons/barang.png" />
+        <div class="nav-text">Barang</div>
+    </div>
+
+    <div class="nav-item">
+        <img src="assets/icons/riwayat.png" />
+        <div class="nav-text">Riwayat</div>
+    </div>
+
+    <div class="nav-item">
+        <img src="assets/icons/pengaturan.png" />
+        <div class="nav-text">Pengaturan</div>
+    </div>
+
+</div>
 
 </body>
 </html>
