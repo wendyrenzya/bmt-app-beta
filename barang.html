@@ -10,7 +10,6 @@ body{
   margin:0;padding-bottom:90px;
   background:#f4f5f7;font-family:Inter,Roboto;color:#222;
 }
-
 *{ -webkit-tap-highlight-color:transparent; }
 
 /* HEADER */
@@ -24,136 +23,43 @@ body{
   position:sticky;top:0;z-index:30;
 }
 
-/* SEARCH BAR MODERN */
+/* SEARCH + FILTER */
 .search-row{
   padding:12px 14px 0 14px;
   display:flex;
   gap:12px;
   align-items:center;
 }
-
 .search-box-modern{
-  flex:1;
-  background:#ffffff;
-  border-radius:14px;
-  border:1px solid #e1e1e1;
-  padding:8px 10px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  box-shadow:0 2px 6px rgba(0,0,0,0.05);
+  flex:1;background:#fff;border-radius:14px;border:1px solid #e1e1e1;
+  padding:8px 10px;display:flex;align-items:center;gap:8px;box-shadow:0 2px 6px rgba(0,0,0,0.05);
 }
+.search-box-modern input{flex:1;border:none;outline:none;font-size:15px}
+.search-box-modern input::placeholder{color:#999;font-size:13px}
+.search-icon{width:18px;height:18px;opacity:.65}
+.filter-btn{width:44px;height:44px;background:#fff;border:1px solid #e1e1e1;border-radius:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.05)}
+.filter-btn img{width:22px;height:22px;opacity:.75}
+.filter-panel{display:none;padding:0 14px;margin-top:6px}
+#kategoriFilter,#sortFilter{width:100%;padding:12px;border-radius:14px;border:1px solid #ddd;font-size:14px;background:#fff;margin-bottom:10px}
 
-.search-box-modern input{
-  flex:1;
-  border:none;
-  outline:none;
-  font-size:15px;
-}
-
-.search-box-modern input::placeholder{
-  color:#999;
-  font-size:13px;
-}
-
-.search-icon{
-  width:18px;height:18px;opacity:.65;
-}
-
-/* FILTER BUTTON */
-.filter-btn{
-  width:44px;height:44px;
-  background:#ffffff;
-  border:1px solid #e1e1e1;
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  box-shadow:0 2px 6px rgba(0,0,0,0.05);
-}
-
-.filter-btn img{
-  width:22px;height:22px;opacity:.75;
-}
-
-/* FILTER PANEL */
-.filter-panel{
-  display:none;
-  padding:0 14px;
-  margin-top:6px;
-}
-
-#kategoriFilter,#sortFilter{
-  width:100%;
-  padding:12px;
-  border-radius:14px;
-  border:1px solid #ddd;
-  font-size:14px;
-  background:#fff;
-  margin-bottom:10px;
-}
-
-/* LIST BARANG */
-.list{
-  padding:12px 14px;
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-}
-
-.item{
-  background:#fff;
-  border-radius:14px;
-  padding:10px;
-  display:flex;
-  gap:14px;
-  align-items:center;
-  box-shadow:0 2px 6px rgba(0,0,0,0.08);
-  cursor:pointer;
-  transition:.15s;
-}
-.item img{
-  width:64px;height:64px;object-fit:cover;
-  border-radius:8px;background:#eee;
-}
-.item-info{ flex:1; }
-.item-name{
-  font-size:15px;font-weight:700;margin-bottom:4px;
-}
-.item-sub{
-  font-size:13px;color:#666;
-}
+/* LIST */
+.list{padding:12px 14px;display:flex;flex-direction:column;gap:14px}
+.item{background:#fff;border-radius:14px;padding:10px;display:flex;gap:14px;align-items:center;box-shadow:0 2px 6px rgba(0,0,0,0.08);cursor:pointer;transition:.15s}
+.item img{width:64px;height:64px;object-fit:cover;border-radius:8px;background:#eee}
+.item-info{flex:1}
+.item-name{font-size:15px;font-weight:700;margin-bottom:4px}
+.item-sub{font-size:13px;color:#666}
 
 /* NAVBAR */
-.navbar{
-  position:fixed;bottom:0;left:0;right:0;background:#fff;
-  display:flex;justify-content:space-around;
-  padding:8px 0 6px;border-top:1px solid #e6e6e6;z-index:999;
-}
-
-.nav-item{
-  display:flex;flex-direction:column;align-items:center;
-  font-size:11px;font-weight:600;color:#6a6a6a;
-  padding:6px 12px;border-radius:16px;
-  cursor:pointer;transition:.15s;
-}
-.nav-item img{
-  width:28px;height:28px;margin-bottom:4px;opacity:.65;
-}
-.nav-active{
-  background:rgba(62,139,255,0.12);
-  color:#3E8BFF !important;
-}
-.nav-active img{opacity:1 !important;}
+.navbar{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:8px 0 6px;border-top:1px solid #e6e6e6;z-index:999}
+.nav-item{display:flex;flex-direction:column;align-items:center;font-size:11px;font-weight:600;color:#6a6a6a;padding:6px 12px;border-radius:16px;cursor:pointer;transition:.15s}
+.nav-item img{width:28px;height:28px;margin-bottom:4px;opacity:.65}
+.nav-active{background:rgba(62,139,255,0.12);color:#3E8BFF !important}
+.nav-active img{opacity:1 !important}
 
 /* BOUNCE */
-.bounce{animation:bounceTap .25s ease-out;}
-@keyframes bounceTap{
-  0%{transform:scale(1)}
-  40%{transform:scale(.92)}
-  100%{transform:scale(1)}
-}
+.bounce{animation:bounceTap .25s ease-out}
+@keyframes bounceTap{0%{transform:scale(1)}40%{transform:scale(.92)}100%{transform:scale(1)}}
 </style>
 </head>
 
@@ -161,21 +67,17 @@ body{
 
 <div class="header">Barang</div>
 
-<!-- SEARCH + FILTER ROW -->
 <div class="search-row">
-
   <div class="search-box-modern">
-    <img src="assets/search_icon.png" class="search-icon">
+    <img src="assets/search_icon.png" class="search-icon" alt="search">
     <input type="text" id="searchInput" placeholder="cari barang..">
   </div>
 
-  <button class="filter-btn" id="filterBtn">
-    <img src="assets/filter_icon.png">
+  <button class="filter-btn" id="filterBtn" title="Filter">
+    <img src="assets/filter_icon.png" alt="filter">
   </button>
-
 </div>
 
-<!-- FILTER PANEL DROPDOWN -->
 <div id="filterPanel" class="filter-panel">
   <select id="kategoriFilter">
     <option value="ALL">Semua Kategori</option>
@@ -190,44 +92,25 @@ body{
   </select>
 </div>
 
-<!-- LIST BARANG -->
 <div class="list" id="listBarang">Memuat data...</div>
 
-<!-- NAVBAR -->
 <div class="navbar">
-
-  <div class="nav-item" onclick="bounceThenNavigate(this,'home.html')">
-    <img src="assets/beranda.png">Beranda
-  </div>
-
-  <div class="nav-item nav-active" onclick="bounceThenNavigate(this,'barang.html')">
-    <img src="assets/barang.png">Barang
-  </div>
-
-  <div class="nav-item" onclick="bounceThenNavigate(this,'riwayat.html')">
-    <img src="assets/riwayat.png">Riwayat
-  </div>
-
-  <div class="nav-item" onclick="bounceThenNavigate(this,'pengaturan.html')">
-    <img src="assets/pengaturan.png">Pengaturan
-  </div>
-
+  <div class="nav-item" onclick="bounceThenNavigate(this,'home.html')"><img src="assets/beranda.png">Beranda</div>
+  <div class="nav-item nav-active" onclick="bounceThenNavigate(this,'barang.html')"><img src="assets/barang.png">Barang</div>
+  <div class="nav-item" onclick="bounceThenNavigate(this,'riwayat.html')"><img src="assets/riwayat.png">Riwayat</div>
+  <div class="nav-item" onclick="bounceThenNavigate(this,'pengaturan.html')"><img src="assets/pengaturan.png">Pengaturan</div>
 </div>
 
 <script src="app.js"></script>
 <script src="navigationGuard.js"></script>
 
 <script>
-/* BOUNCE THEN NAVIGATE */
 function bounceThenNavigate(el,url){
-  if(el){ el.classList.add("bounce"); setTimeout(()=> el.classList.remove("bounce"),260);}
+  if(el){ el.classList.add("bounce"); setTimeout(()=> el.classList.remove("bounce"),260); }
   setTimeout(()=> guardedNavigate(url),80);
 }
 
-/* ===========================================
-   SEARCH + FILTER + SORT SYSTEM
-   =========================================== */
-
+/* Elements */
 const listEl = document.getElementById("listBarang");
 const searchEl = document.getElementById("searchInput");
 const filterBtn = document.getElementById("filterBtn");
@@ -237,21 +120,18 @@ const sortFilter = document.getElementById("sortFilter");
 
 let barangData = [];
 
-/* Toggle panel */
+/* Toggle filter panel */
 filterBtn.onclick = () => {
-  filterPanel.style.display =
-    filterPanel.style.display === "none" || filterPanel.style.display === ""
-      ? "block"
-      : "none";
+  filterPanel.style.display = (filterPanel.style.display === "block") ? "none" : "block";
 };
 
-/* Placeholder auto-hide */
+/* placeholder hide while typing */
 searchEl.addEventListener("input", ()=>{
   searchEl.placeholder = searchEl.value.trim() ? "" : "cari barang..";
   renderList(searchEl.value);
 });
 
-/* Levenshtein fuzzy */
+/* Levenshtein */
 function levenshtein(a, b) {
   if (a.length === 0) return b.length;
   if (b.length === 0) return a.length;
@@ -260,62 +140,44 @@ function levenshtein(a, b) {
   for (let j=0;j<=a.length;j++) matrix[0][j]=j;
   for (let i=1;i<=b.length;i++){
     for (let j=1;j<=a.length;j++){
-      matrix[i][j] = b[i-1] === a[j-1]
-        ? matrix[i-1][j-1]
-        : Math.min(matrix[i-1][j], matrix[i][j-1], matrix[i-1][j-1]) + 1;
+      matrix[i][j] = b[i-1] === a[j-1] ? matrix[i-1][j-1] : Math.min(matrix[i-1][j], matrix[i][j-1], matrix[i-1][j-1]) + 1;
     }
   }
   return matrix[b.length][a.length];
 }
 
-/* Highlight */
 function highlight(text, keywords){
   let t = text;
   keywords.forEach(kw=>{
-    if(!kw)return;
+    if(!kw) return;
     const r = new RegExp("(" + kw + ")", "gi");
     t = t.replace(r, "<span style='background:yellow;border-radius:4px;padding:0 2px;'>$1</span>");
   });
   return t;
 }
 
-/* SORTING */
 function applySorting(data){
   switch(sortFilter.value){
-    case "NAME_ASC":
-      return data.sort((a,b)=>a.nama.localeCompare(b.nama));
-    case "PRICE_LOW":
-      return data.sort((a,b)=>(a.harga||0)-(b.harga||0));
-    case "PRICE_HIGH":
-      return data.sort((a,b)=>(b.harga||0)-(a.harga||0));
-    case "STOCK_HIGH":
-      return data.sort((a,b)=>(b.stock||0)-(a.stock||0));
-    default:
-      return data;
+    case "NAME_ASC": return data.sort((a,b)=>a.nama.localeCompare(b.nama));
+    case "PRICE_LOW": return data.sort((a,b)=>(a.harga||0)-(b.harga||0));
+    case "PRICE_HIGH": return data.sort((a,b)=>(b.harga||0)-(a.harga||0));
+    case "STOCK_HIGH": return data.sort((a,b)=>(b.stock||0)-(a.stock||0));
+    default: return data;
   }
 }
 
-/* RENDER LIST BARANG */
 function renderList(filter=""){
   listEl.innerHTML = "";
-
   const q = filter.toLowerCase().trim();
   const keywords = q.split(/\s+/).filter(k => k.length > 0);
 
   let data = barangData.filter(b => {
-    const t = (
-      (b.nama||"")+" "+
-      (b.kode_barang||"")+" "+
-      (b.kategori||"")
-    ).toLowerCase();
+    const t = ((b.nama||"") + " " + (b.kode_barang||"") + " " + (b.kategori||"")).toLowerCase();
 
-    /* FILTER KATEGORI */
     if (kategoriFilter.value !== "ALL"){
-      if ((b.kategori||"").toLowerCase() !== kategoriFilter.value.toLowerCase())
-        return false;
+      if ((b.kategori||"").toLowerCase() !== kategoriFilter.value.toLowerCase()) return false;
     }
 
-    /* FILTER SEARCH */
     if (keywords.length === 0) return true;
 
     return keywords.every(kw => {
@@ -324,7 +186,6 @@ function renderList(filter=""){
     });
   });
 
-  /* APPLY SORTING */
   data = applySorting(data);
 
   if (data.length === 0){
@@ -334,38 +195,36 @@ function renderList(filter=""){
 
   data.forEach(b => {
     const foto = b.foto && b.foto.trim() !== "" ? b.foto : "assets/no_image.png";
-
     const div = document.createElement("div");
     div.className = "item";
-
     const namaHighlighted = highlight(b.nama, keywords);
 
     div.innerHTML = `
-      <img src="${foto}">
+      <img src="${foto}" alt="${b.nama}">
       <div class="item-info">
         <div class="item-name">${namaHighlighted}</div>
-        <div class="item-sub">${b.kode_barang} • Stok: ${b.stock??0}</div>
+        <div class="item-sub">${b.kode_barang} • Stok: ${b.stock ?? 0}</div>
       </div>
     `;
 
-    div.onclick = () => {
+    div.addEventListener("click", ()=>{
       div.classList.add("bounce");
       setTimeout(()=>div.classList.remove("bounce"),260);
-      /* nanti menuju barang_detail.html */
-    };
+      setTimeout(()=> guardedNavigate(`barang_detail.html?id=${b.id}`),120);
+    });
 
     listEl.appendChild(div);
   });
 }
 
-/* LOAD DATA */
+/* Load data */
 getBarang().then(data=>{
-  barangData = data;
+  barangData = data || [];
 
-  /* Kategori */
-  const cat = [...new Set(barangData.map(b=>b.kategori||""))];
+  /* populate kategori */
+  const cat = [...new Set(barangData.map(x=>x.kategori||""))];
   let html = `<option value="ALL">Semua Kategori</option>`;
-  cat.forEach(c=>{ if(c) html+=`<option value="${c}">${c}</option>` });
+  cat.forEach(c=>{ if(c) html+=`<option value="${c}">${c}</option>`; });
   kategoriFilter.innerHTML = html;
 
   kategoriFilter.onchange = ()=>renderList(searchEl.value);
