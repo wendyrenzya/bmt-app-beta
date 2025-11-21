@@ -1,1 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Detail Barang</title>
 
+<style>
+body{margin:0;background:#fff;font-family:Inter,Roboto;color:#222}
+*{ -webkit-tap-highlight-color:transparent; }
+
+/* HEADER */
+.header{
+  background:linear-gradient(135deg,#3E8BFF,#A259FF);
+  color:#fff;padding:16px 18px;display:flex;align-items:center;gap:14px;font-size:18px;font-weight:700;position:sticky;top:0;z-index:20;
+}
+.header img{width:22px;height:22px;cursor:pointer;}
+
+/* CONTENT */
+.container{padding:20px;}
+
+/* IMAGE + TITLE */
+.top-wrap{display:flex;gap:16px;align-items:center;margin-bottom:20px}
+.top-img{width:200px;height:200px;object-fit:cover;border-radius:14px;background:#e5e5e5}
+.top-info{flex:1;display:flex;flex-direction:column;gap:8px}
+.top-name{font-size:20px;font-weight:800;color:#222}
+.top-stock{font-size:28px;font-weight:800;color:#0066ff}
+
+/* INFO CARD */
+.card{background:#fff;border-radius:14px;border:1px solid #eee;padding:18px 16px;margin-bottom:16px}
+.row{display:flex;justify-content:space-between;margin-bottom:12px;font-size:15px}
+.label{color:#666}
+.value{font-weight:700}
+
+/* FOOTER BUTTONS */
+.footer-btns{display:flex;gap:12px;padding:18px;border-top:1px solid #eee;background:#fff;position:fixed;bottom:0;left:0;right:0}
+.btn{flex:1;padding:14px 0;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;text-align:center}
+.btn-outline{border:2px solid #3E8BFF;color:#3E8BFF;background:#fff}
+.btn-danger{background:#ff3b30;color:#fff}
+
+/* POPUP */
+.popup-bg{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.35);display:flex;justify-content:center;align-items:center;z-index:999;display:none}
+.popup{background:#fff;width:80%;padding:20px;border-radius:14px;text-align:center}
+.popup-btns{display:flex;gap:12px;margin-top:20px}
+.popup-btn{flex:1;padding:10px 0;border-radius:10px;font-weight:700;cursor:pointer}
+.cancel{background:#ddd;color:#333}
+.confirm{background:#ff3b30;color:#fff}
+
+/* bounce */
+.bounce{animation:bounceTap .25s ease-out}
+@keyframes bounceTap{0%{transform:scale(1)}40%{transform:scale(.92)}100%{transform:scale(1)}}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <img src="assets/back_white.png" id="btnBack">
+  Detail Barang
+</div>
+
+<div class="container" id="content">Memuat...</div>
+
+<div class="footer-btns">
+  <div class="btn btn-outline" id="btnEdit">Ubah</div>
+  <div class="btn btn-danger" id="btnDelete">Hapus</div>
+</div>
+
+<div class="popup-bg" id="popupDelete">
+  <div class="popup">
+    <div style="font-size:16px;font-weight:700;margin-bottom:6px;">Hapus Barang?</div>
+    <div style="font-size:14px;color:#555;">Tindakan ini tidak dapat dibatalkan.</div>
+    <div class="popup-btns">
+      <div class="popup-btn cancel" id="cancelDelete">Batal</div>
+      <div class="popup-btn confirm" id="confirmDelete">Hapus</div>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script src="navigationGuard.js"></script>
+
+<script>
+/* Back */
+document.getElementById("btnBack").onclick = () => {
+  const el = document.getElementById("btnBack");
+  el.classList.add("bounce"); setTimeout(()=>el.classList.remove("bounce"),260);
+  setTimeout(()=>guardedNavigate("barang.html"),120);
+};
+
+function getID(){ const p = new URLSearchParams(window.location.search); return Number(p.get("id")); }
+const content = document.getElementById("content");
+const popup = document.getElementById("popupDelete");
+const cancelDelete = document.getElementById("cancelDelete");
+const confirmDelete = document.getElementById("confirmDelete");
+
+cancelDelete.onclick = ()=> popup.style.display = "none";
+
+/* Load data */
+getBarang().then(list => {
+  const id = getID();
+  const b = (list||[]).find(x => x.id === id);
+
+  if(!b){
+    content.innerHTML = `<div style="text-align:center;color:#888;padding:40px 0">
+      Barang tidak ditemukan<br><br>
+      <button onclick="guardedNavigate('barang.html')" style="padding:10px 18px;border:none;border-radius:10px;background:#3E8BFF;color:#fff;font-weight:600;">Kembali</button>
+    </div>`; return;
+  }
+
+  const foto = b.foto && b.foto.trim() !== "" ? b.foto : "assets/no_image.png";
+  const role = localStorage.getItem("role") || "staff";
+  const hargaModal = role === "admin" ? `Rp ${b.harga_modal.toLocaleString('id-ID')}` : `-`;
+
+  content.innerHTML = `
+    <div class="top-wrap">
+      <img src="${foto}" class="top-img" alt="${b.nama}">
+      <div class="top-info">
+        <div class="top-name">${b.nama}</div>
+        <div class="top-stock">${b.stock ?? 0}</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row"><div class="label">Kode Barang</div><div class="value">${b.kode_barang}</div></div>
+      <div class="row"><div class="label">Kategori</div><div class="value">${b.kategori || "-"}</div></div>
+      <div class="row"><div class="label">Harga Modal</div><div class="value">${hargaModal}</div></div>
+      <div class="row"><div class="label">Harga Jual</div><div class="value">Rp ${b.harga.toLocaleString('id-ID')}</div></div>
+    </div>
+  `;
+});
+
+/* Edit */
+document.getElementById("btnEdit").onclick = () => {
+  const el = document.getElementById("btnEdit");
+  el.classList.add("bounce"); setTimeout(()=>el.classList.remove("bounce"),260);
+  const id = getID();
+  guardedNavigate(`edit_barang.html?id=${id}`);
+};
+
+/* Delete */
+document.getElementById("btnDelete").onclick = () => {
+  const el = document.getElementById("btnDelete");
+  el.classList.add("bounce"); setTimeout(()=>el.classList.remove("bounce"),260);
+  popup.style.display = "flex";
+};
+
+confirmDelete.onclick = () => {
+  confirmDelete.classList.add("bounce"); 
+  const id = getID();
+  let list = loadLocal("barang");
+  list = list.filter(x => x.id !== id);
+  saveLocal("barang", list);
+  setTimeout(()=>guardedNavigate("barang.html"),200);
+};
+</script>
+
+</body>
+</html>
