@@ -1,352 +1,156 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tambah Barang</title>
-
 <style>
-body{
-  margin:0;
-  background:#fff;
-  font-family:Inter,Roboto;
-  color:#222;
-}
-*{ -webkit-tap-highlight-color:transparent; }
-
-/* HEADER */
-.header{
-  background:linear-gradient(135deg,#3E8BFF,#A259FF);
-  color:#fff;
-  padding:16px 18px;
-  display:flex;
-  align-items:center;
-  gap:14px;
-  font-size:18px;
-  font-weight:700;
-  position:sticky;
-  top:0;
-  z-index:20;
-}
-.header img{
-  width:22px;
-  height:22px;
-  cursor:pointer;
-}
-
-/* CONTAINER */
-.container{
-  padding:18px;
-}
-
-/* FORM CARD */
-.form-card{
-  background:#fff;
-  border-radius:14px;
-  border:1px solid #eee;
-  box-shadow:0 2px 8px rgba(0,0,0,0.06);
-  padding:18px;
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-}
-
-.label{
-  font-size:14px;
-  font-weight:600;
-  color:#444;
-  margin-bottom:4px;
-}
-
-.input, select, textarea{
-  width:100%;
-  padding:12px;
-  border-radius:12px;
-  border:1px solid #ccc;
-  font-size:14px;
-  box-sizing:border-box;
-}
-textarea{
-  resize:none;
-  height:90px;
-}
-
-/* More Section */
-.more-toggle{
-  width:100%;
-  text-align:center;
-  padding:10px 0;
-  cursor:pointer;
-  color:#3E8BFF;
-  font-weight:700;
-  font-size:14px;
-  display:flex;
-  gap:6px;
-  align-items:center;
-  justify-content:center;
-  margin-top:4px;
-}
-
-.more-wrap{
-  overflow:hidden;
-  transition:max-height .35s ease;
-  max-height:0;
-}
-
-/* PREVIEW IMAGE */
-.preview-img{
-  width:130px;
-  height:130px;
-  border-radius:14px;
-  background:#e5e5e5;
-  object-fit:cover;
-  margin-top:5px;
-}
-
-/* FOOTER BUTTONS */
-.footer-btns{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:#fff;
-  border-top:1px solid #eee;
-  display:flex;
-  gap:12px;
-  padding:14px;
-}
-
-.btn{
-  flex:1;
-  padding:14px 0;
-  border-radius:12px;
-  text-align:center;
-  font-size:15px;
-  font-weight:700;
-  cursor:pointer;
-}
-.btn-outline{
-  border:2px solid #888;
-  color:#555;
-}
-.btn-primary{
-  background:#3E8BFF;
-  color:#fff;
-}
-
-/* Bounce */
-.bounce{
-  animation:bounce .25s ease-out;
-}
-@keyframes bounce{
-  0%{transform:scale(1)}
-  40%{transform:scale(.92)}
-  100%{transform:scale(1)}
-}
+body{margin:0;background:#fff;font-family:Inter,Roboto;color:#222}*{-webkit-tap-highlight-color:transparent}
+.header{background:linear-gradient(135deg,#3E8BFF,#A259FF);color:#fff;padding:16px 18px;display:flex;align-items:center;gap:14px;font-size:18px;font-weight:700;position:sticky;top:0;z-index:20}
+.container{padding:18px}.form-card{background:#fff;border-radius:14px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,0.06);padding:18px;display:flex;flex-direction:column;gap:14px}.label{font-size:14px;font-weight:600;color:#444;margin-bottom:4px}.input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid #ccc;font-size:14px;box-sizing:border-box}textarea{resize:none;height:90px}.more-toggle{width:100%;text-align:center;padding:10px 0;cursor:pointer;color:#3E8BFF;font-weight:700;font-size:14px;display:flex;gap:6px;align-items:center;justify-content:center;margin-top:4px}.more-wrap{overflow:hidden;transition:max-height .35s ease;max-height:0}.preview-img{width:130px;height:130px;border-radius:14px;background:#e5e5e5;object-fit:cover;margin-top:5px}.footer-btns{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #eee;display:flex;gap:12px;padding:14px}.btn{flex:1;padding:14px 0;border-radius:12px;text-align:center;font-size:15px;font-weight:700;cursor:pointer}.btn-outline{border:2px solid #888;color:#555}.btn-primary{background:#3E8BFF;color:#fff}.bounce{animation:bounce .25s ease-out}@keyframes bounce{0%{transform:scale(1)}40%{transform:scale(.92)}100%{transform:scale(1)}}
 </style>
 </head>
-
 <body>
 
-<!-- HEADER -->
 <div class="header">
-  <img src="assets/back_white.png" id="btnBack">
-  Tambah Barang
+  <img src="assets/back_white.png" id="btnBack" style="width:22px;height:22px;cursor:pointer"> Tambah Barang
 </div>
 
-<!-- CONTENT -->
 <div class="container">
   <div class="form-card">
-
-    <!-- Nama -->
     <div>
       <div class="label">Nama Barang *</div>
-      <input class="input" id="nama" required>
+      <input id="nama" class="input">
     </div>
 
-    <!-- Kode -->
     <div>
-      <div class="label">Kode Barang *</div>
-      <input class="input" id="kode" required>
+      <div class="label">Kode Barang (otomatis)</div>
+      <input id="kode" class="input" readonly>
     </div>
 
-    <!-- Kategori -->
     <div>
       <div class="label">Kategori *</div>
-      <select id="kategori">
-        <option value="">— Pilih Kategori —</option>
-        <option>Oli</option>
-        <option>Ban</option>
-        <option>Sparepart</option>
-        <option>Lampu</option>
-        <option>Aki</option>
-        <option>Suspensi</option>
-        <option>Lainnya</option>
-      </select>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <input id="kategoriDisplay" class="input" readonly placeholder="Pilih kategori" style="flex:1;cursor:pointer;">
+        <button id="openCat" style="padding:10px 12px;border-radius:10px;border:1px solid #ddd;background:#fff;cursor:pointer">Pilih</button>
+      </div>
     </div>
 
-    <!-- More Toggle -->
-    <div class="more-toggle" id="toggleMore">
-      ▼ More
+    <div>
+      <div class="label">Harga Jual *</div>
+      <input id="harga_jual" class="input" type="number">
     </div>
 
-    <!-- MORE SECTION -->
+    <div class="more-toggle" id="toggleMore">▼ More</div>
+
     <div id="moreSection" class="more-wrap">
-
-      <!-- Harga Modal -->
-      <div style="margin-top:14px;">
+      <div style="margin-top:12px;">
         <div class="label">Harga Modal (opsional)</div>
-        <input class="input" id="harga_modal" type="number">
+        <input id="harga_modal" class="input" type="number">
       </div>
 
-      <!-- Deskripsi -->
       <div>
         <div class="label">Deskripsi (opsional)</div>
         <textarea id="deskripsi"></textarea>
       </div>
 
-      <!-- Foto URL -->
       <div>
         <div class="label">Foto (URL opsional)</div>
-        <input class="input" id="foto_url" placeholder="https://...">
-        <img src="assets/no_image.png" id="preview" class="preview-img">
+        <input id="foto_url" class="input" placeholder="https://...">
+        <img id="preview" class="preview-img" src="assets/no_image.png">
       </div>
-
     </div>
-
   </div>
 </div>
 
-<!-- FOOTER BUTTONS -->
 <div class="footer-btns">
   <div class="btn btn-outline" id="btnCancel">Batal</div>
   <div class="btn btn-primary" id="btnSave">Simpan</div>
 </div>
 
+<!-- category bottom sheet -->
+<div id="catSheet" class="bottom-sheet" style="display:none;">
+  <div style="width:36px;height:5px;background:#e6e6e6;border-radius:999px;margin:8px auto;"></div>
+  <div id="catList"></div>
+</div>
+
 <script src="app.js"></script>
-<script src="navigationGuard.js"></script>
-
 <script>
-let changed = false;
-let moreOpen = false;
+let changed=false, moreOpen=false;
+function markChanged(){ if(!changed){ changed=true; window.unsavedChanges=true; } }
+document.querySelectorAll("input,select,textarea").forEach(el=>el.addEventListener("input", markChanged));
 
-/* Mark changes */
-function markChanged(){
-  if(!changed){
-    changed = true;
-    window.unsavedChanges = true;
-  }
-}
+document.getElementById("btnBack").onclick = ()=> { if(changed && !confirm("Perubahan belum disimpan. Kembali?")) return; guardedNavigate("barang.html"); };
+document.getElementById("btnCancel").onclick = ()=> { document.getElementById("btnCancel").classList.add("bounce"); setTimeout(()=>document.getElementById("btnCancel").classList.remove("bounce"),260); if(changed && !confirm("Perubahan belum disimpan. Batalkan?")) return; guardedNavigate("barang.html"); };
 
-document.querySelectorAll("input,select,textarea").forEach(el=>{
-  el.addEventListener("input", markChanged);
-});
+document.getElementById("toggleMore").onclick = ()=> { const el=document.getElementById("toggleMore"); el.classList.add("bounce"); setTimeout(()=>el.classList.remove("bounce"),250); const more=document.getElementById("moreSection"); if(!moreOpen){ more.style.maxHeight="600px"; document.getElementById("toggleMore").textContent="▲ Less"; moreOpen=true; } else { more.style.maxHeight="0px"; document.getElementById("toggleMore").textContent="▼ More"; moreOpen=false; } };
 
-/* Back */
-btnBack.onclick = ()=>{
-  if(changed && !confirm("Perubahan belum disimpan. Kembali?")) return;
-  guardedNavigate("barang.html");
-};
+document.getElementById("foto_url").oninput = ()=> { document.getElementById("preview").src = document.getElementById("foto_url").value.trim() || "assets/no_image.png"; };
 
-/* Cancel */
-btnCancel.onclick = ()=>{
-  btnCancel.classList.add("bounce");
-  setTimeout(()=>btnCancel.classList.remove("bounce"),260);
-  if(changed && !confirm("Perubahan belum disimpan. Batalkan?")) return;
-  guardedNavigate("barang.html");
-};
+async function initForm(){
+  // generate kode auto (frontend display only; final code generated server-side too)
+  const generated = await generateKodeBarang();
+  document.getElementById("kode").value = generated;
 
-/* Toggle More */
-toggleMore.onclick = ()=>{
-  toggleMore.classList.add("bounce");
-  setTimeout(()=>toggleMore.classList.remove("bounce"),250);
-
-  const more = document.getElementById("moreSection");
-
-  if(!moreOpen){
-    more.style.maxHeight = "600px";
-    toggleMore.textContent = "▲ Less";
-    moreOpen = true;
+  // load categories for sheet
+  const cats = await getKategori();
+  const catList = document.getElementById("catList");
+  if(!cats || cats.length===0){
+    catList.innerHTML = `<div style="text-align:center;color:#888;padding:24px">Belum ada kategori di database</div>`;
   } else {
-    more.style.maxHeight = "0px";
-    toggleMore.textContent = "▼ More";
-    moreOpen = false;
+    catList.innerHTML = cats.map(c=>`<div class="category-item" data-cat="${c}" style="padding:12px;background:#fafafa;margin-bottom:8px;border-radius:10px;cursor:pointer;font-weight:700">${c}</div>`).join("");
+    catList.querySelectorAll(".category-item").forEach(el=>{
+      el.addEventListener("click", ()=>{
+        document.getElementById("kategoriDisplay").value = el.getAttribute("data-cat");
+        markChanged();
+        document.getElementById("catSheet").style.display = "none";
+      });
+    });
   }
-};
-
-/* Foto Preview (URL mode) */
-foto_url.oninput = ()=>{
-  const url = foto_url.value.trim();
-  preview.src = url ? url : "assets/no_image.png";
-};
-
-/* AUTO FETCH DUCKDUCKGO */
-async function fetchDuckImage(keyword){
-  try{
-    const q = encodeURIComponent(keyword);
-    const url = `https://duckduckgo.com/?q=${q}&iax=images&ia=images`;
-    const html = await fetch(url).then(r=>r.text());
-
-    const match = html.match(/imgurl":"(.*?)"/);
-    if(match && match[1]) return match[1];
-  }catch(e){
-    console.warn("DuckDuckGo fetch error:",e);
-  }
-  return ""; // fallback
 }
+initForm();
 
-/* Save */
-btnSave.onclick = async ()=>{
-  btnSave.classList.add("bounce");
-  setTimeout(()=>btnSave.classList.remove("bounce"),260);
+document.getElementById("openCat").onclick = ()=> { document.getElementById("catSheet").style.display = "block"; };
+document.addEventListener("click", (ev)=>{ const sheet = document.getElementById("catSheet"); if(sheet.style.display==="block" && !sheet.contains(ev.target) && ev.target.id !== "openCat" && ev.target.id !== "kategoriDisplay") sheet.style.display = "none"; });
 
-  const namaVal = nama.value.trim();
-  const kodeVal = kode.value.trim();
-  const kategoriVal = kategori.value.trim();
-  const modalVal = Number(harga_modal.value) || 0;
-  const jualVal = Number(prompt("Masukkan Harga Jual:", "")); // sementara popup (bisa buat input tersendiri)
-  const stokVal = 0;
-  const deskVal = deskripsi.value.trim();
-  let fotoVal = foto_url.value.trim();
+document.getElementById("btnSave").onclick = async ()=>{
+  const nama = document.getElementById("nama").value.trim();
+  const kode = document.getElementById("kode").value.trim(); // shown but server will ignore and generate
+  const kategori = document.getElementById("kategoriDisplay").value.trim();
+  const harga_jual = Number(document.getElementById("harga_jual").value) || 0;
+  const harga_modal = Number(document.getElementById("harga_modal").value) || 0;
+  const deskripsi = document.getElementById("deskripsi").value.trim();
+  let foto = document.getElementById("foto_url").value.trim();
 
-  if(!namaVal || !kodeVal || !kategoriVal){
-    alert("Nama, Kode, dan Kategori wajib diisi.");
+  if(!nama || !kategori || !harga_jual){
+    alert("Nama, Kategori, dan Harga Jual wajib diisi.");
     return;
   }
 
-  /* If foto empty → auto fetch */
-  if(!fotoVal){
-    fotoVal = await fetchDuckImage(namaVal);
-    if(!fotoVal){
-      fotoVal = "assets/no_image.png";
-    }
+  if(!foto){
+    foto = await fetchDuckImageAPI(nama) || "assets/no_image.png";
   }
 
-  /* Create new barang */
-  getBarang().then(list=>{
-    const newID = (list.length?Math.max(...list.map(x=>x.id)):0)+1;
+  const payload = {
+    // kode_barang omitted/ignored by server (server will generate numeric code)
+    nama,
+    kategori,
+    harga: harga_jual,
+    harga_modal,
+    stock: 0,
+    deskripsi,
+    foto
+  };
 
-    const newItem = {
-      id:newID,
-      nama:namaVal,
-      kode_barang:kodeVal,
-      kategori:kategoriVal,
-      harga_modal:modalVal,
-      harga:jualVal || 0,
-      stock:stokVal,
-      deskripsi:deskVal,
-      foto:fotoVal,
-      created_at:new Date().toISOString()
-    };
-
-    addBarang(newItem);
+  const res = await addBarang(payload);
+  if (res && res.ok) {
+    showToast("✓ Barang berhasil disimpan");
     window.unsavedChanges = false;
-
-    alert("Barang berhasil ditambahkan");
-    guardedNavigate("barang.html");
-  });
+    setTimeout(()=> guardedNavigate("barang.html"), 700);
+  } else {
+    alert("Gagal menyimpan: " + (res && res.error ? res.error : "unknown"));
+  }
 };
 </script>
-
 </body>
 </html>
