@@ -7,56 +7,99 @@
 
 <style>
 body{
-  margin:0;
-  padding-bottom:90px;
-  background:#f4f5f7;
-  font-family:Inter;
-  color:#222;
+  margin:0;padding-bottom:90px;
+  background:#f4f5f7;font-family:Inter;color:#222;
 }
+* { -webkit-tap-highlight-color:transparent; }
 
-*{ -webkit-tap-highlight-color:transparent; }
-
+/* HEADER */
 .header{
   background:linear-gradient(135deg,#3E8BFF,#A259FF);
   color:#fff;padding:20px;text-align:center;
   font-size:18px;font-weight:700;
+  position:sticky;top:0;z-index:30;
 }
 
-.content{
-  padding:30px 20px;text-align:center;color:#555;
+/* SEARCH BAR */
+.search-box{
+  background:#fff;
+  padding:10px 14px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  margin:0 0 10px 0;
+  border-bottom:1px solid #eee;
+}
+.search-box input{
+  flex:1;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid #ddd;
+  font-size:14px;
 }
 
-/* Navbar */
+/* LIST BARANG */
+.list{
+  padding:12px 14px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.item{
+  background:#fff;
+  border-radius:14px;
+  padding:10px;
+  display:flex;
+  gap:14px;
+  align-items:center;
+  box-shadow:0 2px 6px rgba(0,0,0,0.08);
+  cursor:pointer;
+  transition:.15s;
+}
+.item img{
+  width:64px;height:64px;object-fit:cover;
+  border-radius:8px;background:#eee;
+}
+.item-info{
+  flex:1;
+}
+.item-name{
+  font-size:15px;font-weight:700;margin-bottom:4px;
+}
+.item-sub{
+  font-size:13px;color:#666;
+}
+
+/* NAVBAR */
 .navbar{
   position:fixed;bottom:0;left:0;right:0;background:#fff;
-  display:flex;justify-content:space-around;padding:8px 0 6px;
-  border-top:1px solid #e6e6e6;z-index:999;
+  display:flex;justify-content:space-around;
+  padding:8px 0 6px;border-top:1px solid #e6e6e6;z-index:999;
 }
-
 .nav-item{
   display:flex;flex-direction:column;align-items:center;
   font-size:11px;font-weight:600;color:#6a6a6a;
-  cursor:pointer;padding:6px 12px;border-radius:16px;
-  transition:0.15s;
+  padding:6px 12px;border-radius:16px;
+  cursor:pointer;transition:.15s;
 }
-
 .nav-item img{
-  width:28px;height:28px;margin-bottom:4px;
-  opacity:.65;
+  width:28px;height:28px;margin-bottom:4px;opacity:.65;
 }
-
 .nav-active{
   background:rgba(62,139,255,0.12);
   color:#3E8BFF !important;
 }
-.nav-active img{opacity:1 !important;}
+.nav-active img{ opacity:1 !important; }
 
+/* BOUNCE */
 .bounce{animation:bounceTap .25s ease-out;}
 @keyframes bounceTap{
   0%{transform:scale(1)}
   40%{transform:scale(.92)}
   100%{transform:scale(1)}
 }
+
 </style>
 </head>
 
@@ -64,31 +107,103 @@ body{
 
 <div class="header">Barang</div>
 
-<div class="content">
-  <b>Fitur ini sedang dibangun</b>
+<!-- Search Box -->
+<div class="search-box">
+  <input type="text" id="searchInput" placeholder="Cari nama / kode / kategori...">
 </div>
 
+<!-- List -->
+<div class="list" id="listBarang">
+  Memuat data...
+</div>
+
+<!-- Navbar -->
 <div class="navbar">
   <div class="nav-item" onclick="bounceThenNavigate(this,'home.html')">
     <img src="assets/beranda.png">Beranda
   </div>
+
   <div class="nav-item nav-active" onclick="bounceThenNavigate(this,'barang.html')">
     <img src="assets/barang.png">Barang
   </div>
+
   <div class="nav-item" onclick="bounceThenNavigate(this,'riwayat.html')">
     <img src="assets/riwayat.png">Riwayat
   </div>
+
   <div class="nav-item" onclick="bounceThenNavigate(this,'pengaturan.html')">
     <img src="assets/pengaturan.png">Pengaturan
   </div>
 </div>
 
+<script src="app.js"></script>
 <script src="navigationGuard.js"></script>
+
 <script>
 function bounceThenNavigate(el,url){
-  if(el){ el.classList.add("bounce"); setTimeout(()=> el.classList.remove("bounce"),260); }
+  if(el){ el.classList.add("bounce"); setTimeout(()=> el.classList.remove("bounce"),260);}
   setTimeout(()=> guardedNavigate(url),90);
 }
+
+/* ======================================
+   LOAD & RENDER LIST BARANG
+   ====================================== */
+
+const listEl = document.getElementById("listBarang");
+const searchEl = document.getElementById("searchInput");
+let barangData = [];
+
+/* Render visual */
+function renderList(filter=""){
+  listEl.innerHTML = "";
+
+  const q = filter.toLowerCase();
+  const data = barangData.filter(b =>
+    b.nama.toLowerCase().includes(q) ||
+    b.kode_barang.toLowerCase().includes(q) ||
+    (b.kategori||"").toLowerCase().includes(q)
+  );
+
+  if(data.length === 0){
+    listEl.innerHTML = `<div style="text-align:center;color:#888;padding:30px 0">Tidak ada barang</div>`;
+    return;
+  }
+
+  data.forEach(b => {
+    const foto = b.foto && b.foto.trim() !== "" ? b.foto : "assets/no_image.png";
+
+    const div = document.createElement("div");
+    div.className = "item";
+    div.innerHTML = `
+      <img src="${foto}">
+      <div class="item-info">
+        <div class="item-name">${b.nama}</div>
+        <div class="item-sub">${b.kode_barang} • Stok: ${b.stock ?? 0}</div>
+      </div>
+    `;
+
+    div.addEventListener("click", ()=>{
+      div.classList.add("bounce");
+      setTimeout(()=>div.classList.remove("bounce"),260);
+      // nanti menuju barang_detail.html
+    });
+
+    listEl.appendChild(div);
+  });
+}
+
+/* Load data */
+getBarang().then(data=>{
+  barangData = data;
+  renderList("");
+});
+
+/* Search real-time */
+searchEl.addEventListener("input", e=>{
+  renderList(e.target.value);
+});
+
 </script>
+
 </body>
 </html>
