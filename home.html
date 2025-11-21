@@ -5,24 +5,72 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Big Motor Apps — Beranda</title>
 <style>
-:root{--accent:#ff8a00;--card:#fff}
+:root{--card:#fff}
 body{margin:0;padding-bottom:90px;background:#f4f5f7;font-family:Inter,Segoe UI,Roboto;color:#222}
-.header{background:var(--accent);padding:20px 18px 36px;color:#fff}
+
+/* gradient header */
+.header{
+  background: linear-gradient(135deg, #3E8BFF, #A259FF);
+  color:#fff;
+  padding:20px 18px 20px;
+}
 .header-title{font-size:20px;font-weight:700}
 .user-row{display:flex;justify-content:space-between;margin-top:6px;font-size:14px;font-weight:500}
 .datetime{font-size:13px;opacity:.95;text-align:right}
-.sticky-card{background:var(--card);margin:-18px 16px 14px;padding:14px;border-radius:14px;box-shadow:0 3px 12px rgba(0,0,0,0.12);font-weight:600}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:16px}
-.menu-item{background:var(--card);border-radius:18px;padding:18px 8px 14px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,0.08);cursor:pointer;transition:transform .15s}
-.menu-item:hover{transform:scale(.98)}
-.menu-item img{width:72px;height:72px;object-fit:contain;display:block;margin:0 auto}
+
+/* sticky message area (white) */
+.sticky-card{
+  background:var(--card);
+  margin:20px 16px 22px;
+  padding:16px;
+  border-radius:14px;
+  box-shadow:0 3px 10px rgba(0,0,0,0.10);
+  font-weight:600;
+}
+
+/* grid & menu */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  padding:0 16px;
+  margin-top:8px;
+}
+.menu-item{
+  background:var(--card);
+  border-radius:18px;
+  padding:18px 8px 14px;
+  text-align:center;
+  box-shadow:0 2px 10px rgba(0,0,0,0.08);
+  cursor:pointer;
+  transition:transform .15s;
+}
+.menu-item img{width:72px;height:72px;object-fit:contain;margin:0 auto}
 .menu-item span{display:block;margin-top:10px;font-size:14px;font-weight:600;color:#111}
-.custom-info-card{background:var(--card);margin:0 16px 20px;padding:16px;border-radius:16px;box-shadow:0 3px 10px rgba(0,0,0,0.10);font-size:14px;color:#444;line-height:1.5}
-.navbar{position:fixed;bottom:0;left:0;right:0;background:var(--card);display:flex;justify-content:space-around;padding:8px 0 6px;border-top:1px solid #e6e6e6;box-shadow:0 -3px 10px rgba(0,0,0,0.06);z-index:999}
+.menu-item:active{ transform:scale(.98); }
+
+/* custom message */
+.custom-info-card{
+  background:var(--card);
+  margin:20px 16px 20px;
+  padding:16px;
+  border-radius:16px;
+  box-shadow:0 3px 10px rgba(0,0,0,0.10);
+  font-size:14px;color:#444;line-height:1.5;
+}
+
+/* navbar */
+.navbar{
+  position:fixed;bottom:0;left:0;right:0;background:var(--card);display:flex;justify-content:space-around;padding:8px 0 6px;border-top:1px solid #e6e6e6;box-shadow:0 -3px 10px rgba(0,0,0,0.06);z-index:999;
+}
 .nav-item{display:flex;flex-direction:column;align-items:center;font-size:11px;font-weight:500;color:#444;cursor:pointer}
 .nav-item img{width:28px;height:28px;margin-bottom:4px;opacity:.75}
-.nav-active{color:var(--accent)}
-.nav-active img{opacity:1}
+.nav-active{color:#fff} /* active uses contrast on gradient */
+.nav-active img{filter:brightness(2)}
+
+/* bounce class (in case navigationGuard didn't inject yet) */
+.bounce { animation: bounceTap 0.25s ease-out; }
+@keyframes bounceTap { 0%{transform:scale(1)} 40%{transform:scale(0.92)} 100%{transform:scale(1)} }
 </style>
 </head>
 <body>
@@ -38,68 +86,69 @@ body{margin:0;padding-bottom:90px;background:#f4f5f7;font-family:Inter,Segoe UI,
 <div class="sticky-card" id="stickyMessage">Memuat...</div>
 
 <div class="grid">
-  <div class="menu-item" onclick="guardedNavigate('penjualan.html')">
-    <img src="assets/penjualan.png" alt="Penjualan"><span>Penjualan</span>
+  <div class="menu-item" data-target="penjualan.html" onclick="bounceThenNavigate(this,'penjualan.html')">
+    <img src="assets/penjualan.png"><span>Penjualan</span>
   </div>
-  <div class="menu-item" onclick="guardedNavigate('servis.html')">
-    <img src="assets/servis.png" alt="Servis"><span>Servis</span>
+  <div class="menu-item" data-target="servis.html" onclick="bounceThenNavigate(this,'servis.html')">
+    <img src="assets/servis.png"><span>Servis</span>
   </div>
-  <div class="menu-item" onclick="guardedNavigate('stok_masuk.html')">
-    <img src="assets/stok_masuk.png" alt="Stok Masuk"><span>Stok Masuk</span>
+  <div class="menu-item" data-target="stok_masuk.html" onclick="bounceThenNavigate(this,'stok_masuk.html')">
+    <img src="assets/stok_masuk.png"><span>Stok Masuk</span>
   </div>
-  <div class="menu-item" onclick="guardedNavigate('pengeluaran.html')">
-    <img src="assets/pengeluaran.png" alt="Pengeluaran"><span>Pengeluaran</span>
+  <div class="menu-item" data-target="pengeluaran.html" onclick="bounceThenNavigate(this,'pengeluaran.html')">
+    <img src="assets/pengeluaran.png"><span>Pengeluaran</span>
   </div>
-  <div class="menu-item" onclick="guardedNavigate('laporan.html')">
-    <img src="assets/laporan.png" alt="Laporan"><span>Laporan</span>
+  <div class="menu-item" data-target="laporan.html" onclick="bounceThenNavigate(this,'laporan.html')">
+    <img src="assets/laporan.png"><span>Laporan</span>
   </div>
-  <div class="menu-item" onclick="guardedNavigate('more.html')">
-    <img src="assets/more.png" alt="More"><span>More</span>
+  <div class="menu-item" data-target="more.html" onclick="bounceThenNavigate(this,'more.html')">
+    <img src="assets/more.png"><span>More</span>
   </div>
 </div>
 
 <div class="custom-info-card" id="customMessage">Memuat data...</div>
 
 <div class="navbar">
-  <div class="nav-item nav-active" onclick="go('home.html')">
-    <img src="assets/beranda.png" alt="Beranda">Beranda
+  <div class="nav-item nav-active" onclick="bounceThenNavigate(this,'home.html')">
+    <img src="assets/beranda.png">Beranda
   </div>
-  <div class="nav-item" onclick="go('barang.html')">
-    <img src="assets/barang.png" alt="Barang">Barang
+  <div class="nav-item" onclick="bounceThenNavigate(this,'barang.html')">
+    <img src="assets/barang.png">Barang
   </div>
-  <div class="nav-item" onclick="go('riwayat.html')">
-    <img src="assets/riwayat.png" alt="Riwayat">Riwayat
+  <div class="nav-item" onclick="bounceThenNavigate(this,'riwayat.html')">
+    <img src="assets/riwayat.png">Riwayat
   </div>
-  <div class="nav-item" onclick="go('pengaturan.html')">
-    <img src="assets/pengaturan.png" alt="Pengaturan">Pengaturan
+  <div class="nav-item" onclick="bounceThenNavigate(this,'pengaturan.html')">
+    <img src="assets/pengaturan.png">Pengaturan
   </div>
 </div>
 
 <script src="app.js"></script>
 <script src="navigationGuard.js"></script>
-
 <script>
+function bounceThenNavigate(el,url){ try{ if(el) el.classList.add('bounce'); setTimeout(()=> el && el.classList.remove('bounce'),260);}catch(e){} setTimeout(()=> guardedNavigate(url),90); }
 function go(u){ location.href = u; }
-function loadUser() {
-  const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : { name:"Guest" };
+
+function loadUser(){
+  const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {name:"Guest"};
   document.getElementById("userName").textContent = `Hai, ${user.name}`;
 }
 loadUser();
 
 function updateClock(){
-  const now = new Date(); const days = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
-  const hari = days[now.getDay()]; const tgl = now.toLocaleDateString("id-ID");
-  const jam = now.toLocaleTimeString("id-ID",{hour:"2-digit",minute:"2-digit"});
+  const now=new Date();
+  const days=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+  const hari=days[now.getDay()];
+  const tgl=now.toLocaleDateString("id-ID");
+  const jam=now.toLocaleTimeString("id-ID",{hour:"2-digit",minute:"2-digit"});
   document.getElementById("dateTimeText").textContent = `${hari}, ${tgl} — ${jam}`;
 }
 setInterval(updateClock,1000); updateClock();
 
 getSettings().then(s=>{
   document.getElementById('stickyMessage').innerText = s.sticky_message || '';
-  document.getElementById('customMessage').innerText = s.custom_message || 'Tidak ada informasi';
+  document.getElementById('customMessage').innerText = s.custom_message || '';
 });
-
-/* Ensure menu grid uses guarded navigation for unsaved protection (calls guardedNavigate) */
 </script>
 
 </body>
